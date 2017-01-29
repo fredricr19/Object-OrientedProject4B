@@ -2,13 +2,14 @@ package edu.up.fredricr19.object_orientedproject4b;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 class shogiPiece extends SurfaceView{
-    int PANEL_SIZE = 225;
+    int PANEL_SIZE = 125;
 
     float[] xCords;
     float[] yCords;
@@ -80,11 +81,17 @@ class shogiPiece extends SurfaceView{
         String[] lance = {"香", "車", "Lance", "false"};
         String[] pawn = {"歩", "兵", "Pawn", "true"};
 
-        String[] s = bishop;
+        String[] s = gold;
+
+        if(s[3] == "true"){
+            shogiText.setColor(Color.RED);
+        }else{
+            shogiText.setColor(Color.BLACK);
+        }
 
         canvas.drawText(s[0], xText, yText1, shogiText);
         canvas.drawText(s[1], xText, yText2, shogiText);
         shogiText.setTextSize((float)font/2);
-        canvas.drawText(s[2], xText - 2*s[2].length(), yText2 + (yText2 - yText1) - 6, shogiText);
+        canvas.drawText(s[2], xText - s[2].length(), yText2 + (yText2 - yText1) - 6, shogiText);
     }
 }
