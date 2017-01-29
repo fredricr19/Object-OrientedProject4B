@@ -12,8 +12,8 @@
         android:layout_height="wrap_content">
 
         <edu.up.fredricr19.object_orientedproject4b.shogiPiece
-            android:layout_width="250dp"
-            android:layout_height="250dp"
+            android:layout_width="230px"
+            android:layout_height="235px"
             android:id="@+id/shogiPiece"
             android:clickable="true"
             android:background="@android:color/background_light" />

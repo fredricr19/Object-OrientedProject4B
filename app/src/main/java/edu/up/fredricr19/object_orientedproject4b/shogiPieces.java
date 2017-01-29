@@ -46,7 +46,7 @@ class shogiPiece extends SurfaceView{
 
     @Override
     public void onDraw(Canvas canvas){
-        position(0, 0, PANEL_SIZE, true);
+        position(0, 5, PANEL_SIZE, true);
 
         Paint shogiPaint = new Paint();
         Paint shogiOut = new Paint();
@@ -57,7 +57,7 @@ class shogiPiece extends SurfaceView{
         shogiPaint.setColor(0xFFD2B48C);
 
         shogiOut.setStyle(Paint.Style.STROKE);
-        shogiOut.setStrokeWidth(500);
+        shogiOut.setStrokeWidth(5);
 
         Path shogiPiece = new Path();
         shogiPiece.reset();
@@ -69,7 +69,6 @@ class shogiPiece extends SurfaceView{
         shogiPiece.lineTo(xCords[0], yCords[0]);
 
         canvas.drawPath(shogiPiece, shogiPaint);
-
         canvas.drawPath(shogiPiece, shogiOut);
 
         String[] king = {"王", "將", "King", "false"};
@@ -81,14 +80,11 @@ class shogiPiece extends SurfaceView{
         String[] lance = {"香", "車", "Lance", "false"};
         String[] pawn = {"歩", "兵", "Pawn", "true"};
 
-        String[] s = knight;
+        String[] s = bishop;
 
         canvas.drawText(s[0], xText, yText1, shogiText);
         canvas.drawText(s[1], xText, yText2, shogiText);
         shogiText.setTextSize((float)font/2);
-        canvas.drawText(s[2], xText - s[2].length(), yText2 + (yText2 - yText1), shogiText);
+        canvas.drawText(s[2], xText - 2*s[2].length(), yText2 + (yText2 - yText1) - 6, shogiText);
     }
-
-
-
 }
