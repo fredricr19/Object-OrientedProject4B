@@ -10,8 +10,8 @@ import android.view.SurfaceView;
 class shogiPiece extends SurfaceView{
     int PANEL_SIZE = 250;
 
-    int[] xCords;
-    int[] yCords;
+    float[] xCords;
+    float[] yCords;
     int xText;
     int yText1;
     int yText2;
@@ -24,9 +24,9 @@ class shogiPiece extends SurfaceView{
     }
 
     public void position(int x, int y, int r, boolean user){
-        int[] xC = {x, x+r/4, x+r/2, x+3*r/4, x+r};
-        int[] yC1 = {y+r, y+r/5, y, y+r/5, y+r}; //Rightside up
-        int[] yC2 = {y, y+4*r/5, y+r, y+4*r/5, y}; //Upside down
+        float[] xC = {x, x+r/4, x+r/2, x+3*r/4, x+r};
+        float[] yC1 = {y+r, y+r/5, y, y+r/5, y+r}; //Rightside up
+        float[] yC2 = {y, y+4*r/5, y+r, y+4*r/5, y}; //Upside down
 
         xCords = xC;
         if(user){
@@ -51,9 +51,9 @@ class shogiPiece extends SurfaceView{
         Paint shogiPaint = new Paint();
         Paint shogiText = new Paint();
 
-        //shogiText.setTextSize(48f);
+        shogiText.setTextSize((float)font);
 
-        shogiPaint.setColor(0xD2B48C);
+        shogiPaint.setColor(0xFF00000);
 
         Path shogiPiece = new Path();
         shogiPiece.reset();
@@ -76,12 +76,13 @@ class shogiPiece extends SurfaceView{
 
         String[] s = silver;
 
-        /*if(s[3] == "true"){
-            shogiText.setColor(Color.RED);
-        }*/
-
         canvas.drawText(s[0], xText, yText1, shogiText);
         canvas.drawText(s[1], xText, yText2, shogiText);
-        canvas.drawText(s[2], xText, 3*yText1/2, shogiText);
+
+        shogiText.setTextSize((float)font/2);
+        canvas.drawText(s[2], xText - s[2].length(), yText2 + (yText2 - yText1), shogiText);
     }
+
+
+
 }
