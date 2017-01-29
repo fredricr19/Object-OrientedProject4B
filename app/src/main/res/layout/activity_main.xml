@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="edu.up.fredricr19.object_orientedproject4b.MainActivity">
+    tools:context="edu.up.fredricr19.object_orientedproject4b.MainActivity"
+    android:background="@android:color/white">
 
     <edu.up.fredricr19.object_orientedproject4b.shogiPiece
         android:layout_width="135px"
@@ -13,5 +14,5 @@
         android:id="@+id/shogiPiece"
         android:clickable="true"
         android:rotation="0"
-        android:background="@android:color/background_light" />
+        android:background="@android:color/white" />
 </LinearLayout>

@@ -13,10 +13,12 @@ class shogiPiece extends SurfaceView{
 
     float[] xCords;
     float[] yCords;
+    float radius;
     int xText;
     int yText1;
     int yText2;
     int font;
+    float n = 1;
     boolean isUser;
 
     public shogiPiece(Context context, AttributeSet attrs){
@@ -37,6 +39,7 @@ class shogiPiece extends SurfaceView{
         }
 
         font = (r/4);
+        radius = (float)r;
 
         xText = x+r/2 - font/2;
         yText1 = y+r/2;
@@ -52,8 +55,6 @@ class shogiPiece extends SurfaceView{
         Paint shogiPaint = new Paint();
         Paint shogiOut = new Paint();
         Paint shogiText = new Paint();
-
-        shogiText.setTextSize((float)font);
 
         shogiPaint.setColor(0xFFD2B48C);
 
@@ -81,7 +82,7 @@ class shogiPiece extends SurfaceView{
         String[] lance = {"香", "車", "Lance", "false"};
         String[] pawn = {"歩", "兵", "Pawn", "true"};
 
-        String[] s = gold;
+        String[] s = silver;
 
         if(s[3] == "true"){
             shogiText.setColor(Color.RED);
@@ -89,9 +90,18 @@ class shogiPiece extends SurfaceView{
             shogiText.setColor(Color.BLACK);
         }
 
+        if(s[2].length() == 4){
+            n = 1/2;
+        }else if(s[2].length() == 6){
+            n = 3/4;
+        }
+
+        shogiText.setTextSize((float)font);
+
         canvas.drawText(s[0], xText, yText1, shogiText);
         canvas.drawText(s[1], xText, yText2, shogiText);
+
         shogiText.setTextSize((float)font/2);
-        canvas.drawText(s[2], xText - s[2].length(), yText2 + (yText2 - yText1) - 6, shogiText);
+        canvas.drawText(s[2], xText - n*s[2].length(), yText2 + (yText2 - yText1) - 6, shogiText);
     }
 }
