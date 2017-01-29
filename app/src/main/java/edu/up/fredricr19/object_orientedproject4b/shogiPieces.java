@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 class shogiPiece extends SurfaceView{
-    int PANEL_SIZE = 250;
+    int PANEL_SIZE = 225;
 
     float[] xCords;
     float[] yCords;
@@ -53,7 +53,7 @@ class shogiPiece extends SurfaceView{
 
         shogiText.setTextSize((float)font);
 
-        shogiPaint.setColor(0xFF00000);
+        shogiPaint.setColor(0xFFD2B48C);
 
         Path shogiPiece = new Path();
         shogiPiece.reset();
@@ -74,13 +74,13 @@ class shogiPiece extends SurfaceView{
         String[] lance = {"香", "車", "Lance", "false"};
         String[] pawn = {"歩", "兵", "Pawn", "true"};
 
-        String[] s = silver;
+        String[] s = knight;
+
 
         canvas.drawText(s[0], xText, yText1, shogiText);
         canvas.drawText(s[1], xText, yText2, shogiText);
-
-        shogiText.setTextSize((float)font/2);
-        canvas.drawText(s[2], xText - s[2].length(), yText2 + (yText2 - yText1), shogiText);
+        //shogiText.setTextSize((float)font/2);
+        //canvas.drawText(s[2], xText - s[2].length(), yText2 + (yText2 - yText1), shogiText);
     }
 
 
