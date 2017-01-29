@@ -1,118 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="24"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context="edu.up.fredricr19.object_orientedproject4b.MainActivity">
 
-    <LinearLayout
-        android:layout_height="0dp"
-        android:layout_weight="2"
+    <edu.up.fredricr19.object_orientedproject4b.shogiPiece
         android:layout_width="match_parent"
-        android:background="#636363"
-        android:weightSum="9">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="CPU"
-            android:id="@+id/displayCPU"
-            android:layout_weight="3"
-            android:textColor="#efce10"
-            android:textSize="50dp" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="LANGUAGE"
-            android:id="@+id/LANGUAGE"
-            android:layout_weight="3"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:text="RULES"
-            android:id="@+id/RULES"
-            android:layout_weight="3"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_height="0dp"
-        android:layout_weight="18"
-        android:layout_width="match_parent"
-        android:background="#363636">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4"
-        android:weightSum="9">
-
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="6"
-            android:weightSum="6"
-            android:background="#000000">
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:text="PASS"
-                android:id="@+id/PASS"
-                android:layout_weight="2"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:text="RESTART"
-                android:id="@+id/RESTART"
-                android:layout_weight="2"/>
-
-            <TextClock
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:id="@+id/textClock"
-                android:layout_weight="2" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:background="#008800"
-            android:orientation="vertical"
-            android:weightSum="2">
-
-            <LinearLayout
-                android:layout_height="0dp"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:background="#080080">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:text="Human"
-                    android:id="@+id/displayHuman"
-                    android:layout_weight="3"
-                    android:textColor="#efce10"
-                    android:textSize="50dp" />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_height="0dp"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:background="#158851">
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:id="@+id/surfaceView"
+        android:clickable="false" />
 
 
 </LinearLayout>

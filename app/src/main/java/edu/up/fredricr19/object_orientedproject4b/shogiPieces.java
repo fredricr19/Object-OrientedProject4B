@@ -9,14 +9,12 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 class shogiPiece extends SurfaceView{
-    int PANEL_SIZE = 250;
+    int PANEL_SIZE = 50;
 
     public shogiPiece(Context context, AttributeSet attrs){
         super(context, attrs);
         setWillNotDraw(false);
     }
-
-    //public static final Color Tan = new Color(210, 180, 140);
 
     int[] xCords;
     int[] yCords;
@@ -104,5 +102,12 @@ class shogiPiece extends SurfaceView{
             canvas.drawText(s[1], -27*xText/16, -yText1 + PANEL_SIZE/4, shogiText);
             canvas.drawText(s[0], -27*xText/16, -yText2 + PANEL_SIZE/4, shogiText);
         }
+    }
+
+    @Override
+    public void onDraw(Canvas canvas){
+        position(0, 0, 100, true);
+        drawShogi(canvas);
+
     }
 }
