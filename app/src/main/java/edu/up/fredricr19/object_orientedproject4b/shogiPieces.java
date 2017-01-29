@@ -2,7 +2,6 @@ package edu.up.fredricr19.object_orientedproject4b;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
@@ -36,7 +35,7 @@ class shogiPiece extends SurfaceView{
             yCords = yC2;
         }
 
-        font = r/4;
+        font = (r/4);
 
         xText = x+r/2 - font/2;
         yText1 = y+r/2;
@@ -45,11 +44,14 @@ class shogiPiece extends SurfaceView{
         isUser = user;
     }
 
-    public void drawShogi(Canvas canvas){
+    @Override
+    public void onDraw(Canvas canvas){
+        position(0, 0, 100, true);
+
         Paint shogiPaint = new Paint();
         Paint shogiText = new Paint();
 
-        shogiText.setTextSize(48f);
+        //shogiText.setTextSize(48f);
 
         shogiPaint.setColor(0xD2B48C);
 
@@ -61,15 +63,7 @@ class shogiPiece extends SurfaceView{
         shogiPiece.lineTo(xCords[3], yCords[3]);
         shogiPiece.lineTo(xCords[4], yCords[4]);
 
-
         canvas.drawPath(shogiPiece, shogiPaint);
-
-
-        /*g.setColor(Tan);
-        g.fillPolygon(xCords, yCords, 5);
-
-        g.setColor(Color.BLACK);
-        g.drawPolygon(xCords, yCords, 5);*/
 
         String[] king = {"王", "將", "King", "false"};
         String[] rook = {"飛", "車", "Rook", "false"};
@@ -82,32 +76,18 @@ class shogiPiece extends SurfaceView{
 
         String[] s = silver;
 
-        if(s[3] == "true"){
+        /*if(s[3] == "true"){
             shogiText.setColor(Color.RED);
-        }
+        }*/
 
-        if(isUser){
-            canvas.drawText(s[0], xText, yText1, shogiText);
-            canvas.drawText(s[1], xText, yText2, shogiText);
-            canvas.drawText(s[2], xText, 3*yText1/2, shogiText);
-        }else{
-            /*Graphics2D g2 = (Graphics2D)g;
-            AffineTransform at = new AffineTransform();
-
-            at.setToRotation(Math.PI);
-            g2.setTransform(at);
-
-            g2.setColor(Color.black);
-            g2.setFont(new Font("TimesRoman", Font.PLAIN, font));*/
-            canvas.drawText(s[1], -27*xText/16, -yText1 + PANEL_SIZE/4, shogiText);
-            canvas.drawText(s[0], -27*xText/16, -yText2 + PANEL_SIZE/4, shogiText);
-        }
+        canvas.drawText(s[0], xText, yText1, shogiText);
+        canvas.drawText(s[1], xText, yText2, shogiText);
+        canvas.drawText(s[2], xText, 3*yText1/2, shogiText);
     }
 
-    @Override
+    /*@Override
     public void onDraw(Canvas canvas){
         position(0, 0, 100, true);
         drawShogi(canvas);
-
-    }
+    }*/
 }
