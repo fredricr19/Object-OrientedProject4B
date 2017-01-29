@@ -7,10 +7,17 @@
     android:orientation="vertical"
     tools:context="edu.up.fredricr19.object_orientedproject4b.MainActivity">
 
-    <edu.up.fredricr19.object_orientedproject4b.shogiPiece
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/shogiPiece"
-        android:clickable="false" />
+        android:layout_height="wrap_content">
+
+        <edu.up.fredricr19.object_orientedproject4b.shogiPiece
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:id="@+id/shogiPiece"
+            android:clickable="false"
+            android:background="@android:color/background_light" />
+    </LinearLayout>
+
 
 </LinearLayout>

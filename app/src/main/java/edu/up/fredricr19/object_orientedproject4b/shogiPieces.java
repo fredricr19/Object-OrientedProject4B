@@ -8,12 +8,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 class shogiPiece extends SurfaceView{
-    int PANEL_SIZE = 50;
-
-    public shogiPiece(Context context, AttributeSet attrs){
-        super(context, attrs);
-        setWillNotDraw(false);
-    }
+    int PANEL_SIZE = 250;
 
     int[] xCords;
     int[] yCords;
@@ -22,6 +17,11 @@ class shogiPiece extends SurfaceView{
     int yText2;
     int font;
     boolean isUser;
+
+    public shogiPiece(Context context, AttributeSet attrs){
+        super(context, attrs);
+        setWillNotDraw(false);
+    }
 
     public void position(int x, int y, int r, boolean user){
         int[] xC = {x, x+r/4, x+r/2, x+3*r/4, x+r};
@@ -46,7 +46,7 @@ class shogiPiece extends SurfaceView{
 
     @Override
     public void onDraw(Canvas canvas){
-        position(0, 0, 100, true);
+        position(0, 0, PANEL_SIZE, true);
 
         Paint shogiPaint = new Paint();
         Paint shogiText = new Paint();
@@ -84,10 +84,4 @@ class shogiPiece extends SurfaceView{
         canvas.drawText(s[1], xText, yText2, shogiText);
         canvas.drawText(s[2], xText, 3*yText1/2, shogiText);
     }
-
-    /*@Override
-    public void onDraw(Canvas canvas){
-        position(0, 0, 100, true);
-        drawShogi(canvas);
-    }*/
 }
