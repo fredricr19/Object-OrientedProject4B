@@ -8,7 +8,9 @@ import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
-public class shogiPiece extends SurfaceView{
+class shogiPiece extends SurfaceView{
+    int PANEL_SIZE = 250;
+
     public shogiPiece(Context context, AttributeSet attrs){
         super(context, attrs);
         setWillNotDraw(false);
@@ -82,11 +84,11 @@ public class shogiPiece extends SurfaceView{
 
         String[] s = silver;
 
-        if(isUser){
-            if(s[3] == "true"){
-                shogiText.setColor(Color.RED);
-            }
+        if(s[3] == "true"){
+            shogiText.setColor(Color.RED);
+        }
 
+        if(isUser){
             canvas.drawText(s[0], xText, yText1, shogiText);
             canvas.drawText(s[1], xText, yText2, shogiText);
             canvas.drawText(s[2], xText, 3*yText1/2, shogiText);
@@ -98,9 +100,9 @@ public class shogiPiece extends SurfaceView{
             g2.setTransform(at);
 
             g2.setColor(Color.black);
-            g2.setFont(new Font("TimesRoman", Font.PLAIN, font));
-            g2.drawString(s[1], -27*xText/16, -yText1 + PANEL_SIZE/4);
-            g2.drawString(s[0], -27*xText/16, -yText2 + PANEL_SIZE/4);*/
+            g2.setFont(new Font("TimesRoman", Font.PLAIN, font));*/
+            canvas.drawText(s[1], -27*xText/16, -yText1 + PANEL_SIZE/4, shogiText);
+            canvas.drawText(s[0], -27*xText/16, -yText2 + PANEL_SIZE/4, shogiText);
         }
     }
 }
