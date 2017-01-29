@@ -57,7 +57,7 @@ class shogiPiece extends SurfaceView{
         shogiPaint.setColor(0xFFD2B48C);
 
         shogiOut.setStyle(Paint.Style.STROKE);
-        shogiOut.setStrokeWidth(3);
+        shogiOut.setStrokeWidth(500);
 
         Path shogiPiece = new Path();
         shogiPiece.reset();
@@ -82,7 +82,6 @@ class shogiPiece extends SurfaceView{
         String[] pawn = {"歩", "兵", "Pawn", "true"};
 
         String[] s = knight;
-
 
         canvas.drawText(s[0], xText, yText1, shogiText);
         canvas.drawText(s[1], xText, yText2, shogiText);
