@@ -53,7 +53,7 @@ class shogiPiece extends SurfaceView{
 
         shogiText.setTextSize(48f);
 
-        shogiPaint.setColor(Color.GRAY);
+        shogiPaint.setColor(0xD2B48C);
 
         Path shogiPiece = new Path();
         shogiPiece.reset();
