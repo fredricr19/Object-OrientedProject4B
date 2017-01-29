@@ -71,12 +71,12 @@
                 android:id="@+id/RESTART"
                 android:layout_weight="2"/>
 
-            <Button
+            <TextClock
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:text="SETTINGS"
-                android:id="@+id/SETTINGS"
-                android:layout_weight="2"/>
+                android:id="@+id/textClock"
+                android:layout_weight="2" />
+
         </LinearLayout>
 
         <LinearLayout
