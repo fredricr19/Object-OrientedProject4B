@@ -9,6 +9,10 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 class shogiPiece extends SurfaceView{
+    edu.up.fredricr19.object_orientedproject4b.shogiPiece fr = (edu.up.fredricr19.object_orientedproject4b.shogiPiece)findViewById(R.id.shogiPiece);
+    int h = fr.getHeight();
+    int w = fr.getWidth();
+
     int PANEL_SIZE = 125;
 
     float[] xCords;
@@ -19,24 +23,18 @@ class shogiPiece extends SurfaceView{
     int yText2;
     int font;
     float n = 1;
-    boolean isUser;
 
     public shogiPiece(Context context, AttributeSet attrs){
         super(context, attrs);
         setWillNotDraw(false);
     }
 
-    public void position(int x, int y, int r, boolean user){
+    public void position(int x, int y, int r){
         float[] xC = {x, x+r/4, x+r/2, x+3*r/4, x+r};
-        float[] yC1 = {y+r, y+r/5, y, y+r/5, y+r}; //Rightside up
-        float[] yC2 = {y, y+4*r/5, y+r, y+4*r/5, y}; //Upside down
+        float[] yC = {y+r, y+r/5, y, y+r/5, y+r};
 
         xCords = xC;
-        if(user){
-            yCords = yC1;
-        }else{
-            yCords = yC2;
-        }
+        yCords = yC;
 
         font = (r/4);
         radius = (float)r;
@@ -44,13 +42,11 @@ class shogiPiece extends SurfaceView{
         xText = x+r/2 - font/2;
         yText1 = y+r/2;
         yText2 = y+r/2 + font;
-
-        isUser = user;
     }
 
     @Override
     public void onDraw(Canvas canvas){
-        position(0, 5, PANEL_SIZE, true);
+        position(0, 0, PANEL_SIZE);
 
         Paint shogiPaint = new Paint();
         Paint shogiOut = new Paint();
@@ -82,7 +78,7 @@ class shogiPiece extends SurfaceView{
         String[] lance = {"香", "車", "Lance", "false"};
         String[] pawn = {"歩", "兵", "Pawn", "true"};
 
-        String[] s = silver;
+        String[] s = pawn;
 
         if(s[3] == "true"){
             shogiText.setColor(Color.RED);
@@ -92,8 +88,6 @@ class shogiPiece extends SurfaceView{
 
         if(s[2].length() == 4){
             n = 1/2;
-        }else if(s[2].length() == 6){
-            n = 3/4;
         }
 
         shogiText.setTextSize((float)font);
