@@ -23,7 +23,7 @@ class shogiPiece extends SurfaceView{
     int yText2;
     int font;
     float n = 1;
-    boolean shortHand = true;
+    boolean shortHand = false;
 
     public shogiPiece(Context context, AttributeSet attrs){
         super(context, attrs);
