@@ -23,6 +23,7 @@ class shogiPiece extends SurfaceView{
     int yText2;
     int font;
     float n = 1;
+    boolean shortHand = true;
 
     public shogiPiece(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -46,7 +47,7 @@ class shogiPiece extends SurfaceView{
 
     @Override
     public void onDraw(Canvas canvas){
-        position(0, 0, PANEL_SIZE);
+        position(0, 5, PANEL_SIZE);
 
         Paint shogiPaint = new Paint();
         Paint shogiOut = new Paint();
@@ -78,7 +79,7 @@ class shogiPiece extends SurfaceView{
         String[] lance = {"香", "車", "Lance", "false"};
         String[] pawn = {"歩", "兵", "Pawn", "true"};
 
-        String[] s = pawn;
+        String[] s = lance;
 
         if(s[3] == "true"){
             shogiText.setColor(Color.RED);
@@ -90,10 +91,14 @@ class shogiPiece extends SurfaceView{
             n = 1/2;
         }
 
-        shogiText.setTextSize((float)font);
-
-        canvas.drawText(s[0], xText, yText1, shogiText);
-        canvas.drawText(s[1], xText, yText2, shogiText);
+        if(!shortHand) {
+            shogiText.setTextSize((float)font);
+            canvas.drawText(s[0], xText, yText1, shogiText);
+            canvas.drawText(s[1], xText, yText2, shogiText);
+        }else{
+            shogiText.setTextSize((float)2*font);
+            canvas.drawText(s[0], PANEL_SIZE/2 - PANEL_SIZE/4, (yText1+yText2)/2, shogiText);
+        }
 
         shogiText.setTextSize((float)font/2);
         canvas.drawText(s[2], xText - n*s[2].length(), yText2 + (yText2 - yText1) - 6, shogiText);
