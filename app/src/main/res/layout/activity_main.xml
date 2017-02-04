@@ -9,7 +9,7 @@
     android:background="@android:color/white">
 
     <edu.up.fredricr19.object_orientedproject4b.shogiPiece
-        android:layout_width="130px"
+        android:layout_width="135px"
         android:layout_height="135px"
         android:id="@+id/shogiPiece"
         android:clickable="true"
