@@ -9,10 +9,12 @@
     android:background="@android:color/white">
 
     <edu.up.fredricr19.object_orientedproject4b.shogiPiece
-        android:layout_width="135px"
-        android:layout_height="135px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/shogiPiece"
         android:clickable="true"
         android:rotation="0"
-        android:background="@android:color/white" />
+        android:background="@android:color/white"
+        android:layout_weight="1" />
+
 </LinearLayout>

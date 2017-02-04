@@ -9,11 +9,7 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
-class shogiPiece extends SurfaceView{
-    edu.up.fredricr19.object_orientedproject4b.shogiPiece fr = (edu.up.fredricr19.object_orientedproject4b.shogiPiece)findViewById(R.id.shogiPiece);
-    int h = fr.getHeight();
-    int w = fr.getWidth();
-
+class shogiPiece extends SurfaceView {
     int PANEL_SIZE = 125;
     int start = 4;
 
@@ -29,6 +25,11 @@ class shogiPiece extends SurfaceView{
 
     Typeface type;
 
+    String[] s;
+    String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
+            {"金", "將", "Gold", "true"},{"銀", "將", "Silver", "false"}, {"桂", "馬", "Knight", "false"},
+            {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "true"}};
+
     public shogiPiece(Context context, AttributeSet attrs){
         super(context, attrs);
         setWillNotDraw(false);
@@ -36,7 +37,7 @@ class shogiPiece extends SurfaceView{
         type = Typeface.createFromAsset(context.getAssets(),"fonts/Helvetica.ttf");
     }
 
-    public void position(int x, int y, int r){
+    public void position(int x, int y, int r, String[] piece){
         float[] xC = {x, x+r/4, x+r/2, x+3*r/4, x+r};
         float[] yC = {y+r, y+r/5, y, y+r/5, y+r};
 
@@ -49,11 +50,13 @@ class shogiPiece extends SurfaceView{
         xText = x+r/2 - font/2;
         yText1 = y+r/2;
         yText2 = y+r/2 + font;
+
+        s = piece;
     }
 
-    @Override
-    public void onDraw(Canvas canvas){
-        position(start, start, PANEL_SIZE);
+    //@Override
+    public void drawShogiPiece(Canvas canvas){
+        //position(start, start, PANEL_SIZE, pieces[2]);
 
         Paint shogiPaint = new Paint();
         Paint shogiOut = new Paint();
@@ -77,17 +80,6 @@ class shogiPiece extends SurfaceView{
         canvas.drawPath(shogiPiece, shogiPaint);
         canvas.drawPath(shogiPiece, shogiOut);
 
-        String[] king = {"王", "將", "King", "false"};
-        String[] rook = {"飛", "車", "Rook", "false"};
-        String[] bishop = {"角", "行", "Bishop", "true"};
-        String[] gold = {"金", "將", "Gold", "true"};
-        String[] silver = {"銀", "將", "Silver", "false"};
-        String[] knight = {"桂", "馬", "Knight", "false"};
-        String[] lance = {"香", "車", "Lance", "false"};
-        String[] pawn = {"歩", "兵", "Pawn", "true"};
-
-        String[] s = knight;
-
         if(s[3] == "true"){
             shogiText.setColor(Color.RED);
         }else{
@@ -107,7 +99,7 @@ class shogiPiece extends SurfaceView{
             font = font/2;
         }else{
             shogiText.setTextSize((float)2*font);
-            canvas.drawText(s[0], PANEL_SIZE/2 - PANEL_SIZE/4 + 5, (yText1+yText2)/2 + 6, shogiText);
+            canvas.drawText(s[0], xText - 4*start, (yText1+yText2)/2 + 6, shogiText);
             font = 3*font/4;
             if(s[2].length() > 2){
                 n = 3;
@@ -118,5 +110,20 @@ class shogiPiece extends SurfaceView{
 
         shogiText.setTextSize(font);
         canvas.drawText(s[2], xText - n*s[2].length(), yText2 + (yText2 - yText1) - 6, shogiText);
+    }
+
+    @Override
+    public void onDraw(Canvas canvas){
+        position(start, start, PANEL_SIZE, pieces[1]);
+        drawShogiPiece(canvas);
+
+        position(start, 2*PANEL_SIZE, PANEL_SIZE, pieces[3]);
+        drawShogiPiece(canvas);
+
+        position(2*PANEL_SIZE, start, PANEL_SIZE, pieces[5]);
+        drawShogiPiece(canvas);
+
+        position(2*PANEL_SIZE, 2*PANEL_SIZE, PANEL_SIZE, pieces[7]);
+        drawShogiPiece(canvas);
     }
 }
