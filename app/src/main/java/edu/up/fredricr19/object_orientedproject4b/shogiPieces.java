@@ -54,10 +54,8 @@ class shogiPiece extends SurfaceView {
         s = piece;
     }
 
-    //@Override
-    public void drawShogiPiece(Canvas canvas){
-        //position(start, start, PANEL_SIZE, pieces[2]);
 
+    public void drawShogiPiece(Canvas canvas){
         Paint shogiPaint = new Paint();
         Paint shogiOut = new Paint();
         Paint shogiText = new Paint();
@@ -77,10 +75,12 @@ class shogiPiece extends SurfaceView {
         shogiPiece.lineTo(xCords[0], yCords[0]);
         shogiPiece.lineTo(xCords[1], yCords[1]);
 
+        shogiText.setTypeface(type);
+
         canvas.drawPath(shogiPiece, shogiPaint);
         canvas.drawPath(shogiPiece, shogiOut);
 
-        if(s[3] == "true"){
+        if(s[3].equals("true")){
             shogiText.setColor(Color.RED);
         }else{
             shogiText.setColor(Color.BLACK);
@@ -89,8 +89,6 @@ class shogiPiece extends SurfaceView {
         if(s[2].length() == 4){
             n = 1/2;
         }
-
-        shogiText.setTypeface(type);
 
         if(!shortHand) {
             shogiText.setTextSize((float)font);
@@ -114,16 +112,28 @@ class shogiPiece extends SurfaceView {
 
     @Override
     public void onDraw(Canvas canvas){
-        position(start, start, PANEL_SIZE, pieces[1]);
+        position(start, start, PANEL_SIZE, pieces[0]);
         drawShogiPiece(canvas);
 
-        position(start, 2*PANEL_SIZE, PANEL_SIZE, pieces[3]);
+        position(start+1*PANEL_SIZE, start, PANEL_SIZE, pieces[1]);
         drawShogiPiece(canvas);
 
-        position(2*PANEL_SIZE, start, PANEL_SIZE, pieces[5]);
+        position(start+2*PANEL_SIZE, start, PANEL_SIZE, pieces[2]);
         drawShogiPiece(canvas);
 
-        position(2*PANEL_SIZE, 2*PANEL_SIZE, PANEL_SIZE, pieces[7]);
+        position(start+3*PANEL_SIZE, start, PANEL_SIZE, pieces[3]);
+        drawShogiPiece(canvas);
+
+        position(start+4*PANEL_SIZE, start, PANEL_SIZE, pieces[4]);
+        drawShogiPiece(canvas);
+
+        position(start+5*PANEL_SIZE, start, PANEL_SIZE, pieces[5]);
+        drawShogiPiece(canvas);
+
+        position(start+6*PANEL_SIZE, start, PANEL_SIZE, pieces[6]);
+        drawShogiPiece(canvas);
+
+        position(start+7*PANEL_SIZE, start, PANEL_SIZE, pieces[7]);
         drawShogiPiece(canvas);
     }
 }
