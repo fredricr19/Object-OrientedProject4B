@@ -10,8 +10,17 @@
 
     <edu.up.fredricr19.object_orientedproject4b.shogiPiece
         android:layout_width="match_parent"
-        android:layout_height="135dp"
+        android:layout_height="135px"
         android:id="@+id/shogiPiece"
+        android:clickable="true"
+        android:rotation="0"
+        android:background="@android:color/white"
+        android:layout_weight="1" />
+
+    <edu.up.fredricr19.object_orientedproject4b.shogiPiece
+        android:layout_width="match_parent"
+        android:layout_height="135px"
+        android:id="@+id/shogiPiece2"
         android:clickable="true"
         android:rotation="0"
         android:background="@android:color/white"

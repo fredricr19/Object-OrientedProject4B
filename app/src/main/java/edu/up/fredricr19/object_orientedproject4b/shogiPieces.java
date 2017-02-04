@@ -26,9 +26,9 @@ class shogiPiece extends SurfaceView {
     Typeface type;
 
     String[] s;
-    String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
-            {"金", "將", "Gold", "true"},{"銀", "將", "Silver", "false"}, {"桂", "馬", "Knight", "false"},
-            {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "true"}};
+    String[][] pieces = {{"王", "將", "King", "true"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
+            {"金", "將", "Gold", "false"},{"銀", "將", "Silver", "true"}, {"桂", "馬", "Knight", "false"},
+            {"香", "車", "Lance", "true"}, {"歩", "兵", "Pawn", "true"}};
 
     public shogiPiece(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -115,7 +115,7 @@ class shogiPiece extends SurfaceView {
         position(start, start, PANEL_SIZE, pieces[0]);
         drawShogiPiece(canvas);
 
-        position(start+1*PANEL_SIZE, start, PANEL_SIZE, pieces[1]);
+        position(start+PANEL_SIZE, start, PANEL_SIZE, pieces[1]);
         drawShogiPiece(canvas);
 
         position(start+2*PANEL_SIZE, start, PANEL_SIZE, pieces[2]);
