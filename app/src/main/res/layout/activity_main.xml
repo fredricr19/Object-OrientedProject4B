@@ -6,24 +6,96 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="edu.up.fredricr19.object_orientedproject4b.MainActivity"
-    android:background="@android:color/white">
+    android:background="@android:color/white"
+    android:weightSum="2">
 
-    <edu.up.fredricr19.object_orientedproject4b.shogiPiece
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="130px"
-        android:id="@+id/shogiPiece"
-        android:clickable="true"
-        android:rotation="0"
-        android:background="@android:color/white"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
-    <edu.up.fredricr19.object_orientedproject4b.shogiPiece
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:weightSum="100">
+
+            <view
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                class="android.support.v4.widget.Space"
+                android:id="@+id/view1"
+                android:layout_weight="10" />
+
+            <edu.up.fredricr19.object_orientedproject4b.shogiPiece
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/shogiPiece2"
+                android:clickable="true"
+                android:rotation="0"
+                android:background="@android:color/white"
+                android:layout_weight="80" />
+
+            <view
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                class="android.support.v4.widget.Space"
+                android:id="@+id/view2"
+                android:layout_weight="10" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="130px"
-        android:id="@+id/shogiPiece2"
-        android:clickable="true"
-        android:rotation="0"
-        android:background="@android:color/white"
-        android:layout_weight="1" />
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:weightSum="100">
+
+            <view
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                class="android.support.v4.widget.Space"
+                android:id="@+id/view3"
+                android:layout_weight="10" />
+
+            <edu.up.fredricr19.object_orientedproject4b.shogiPiece
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/shogiPiece2"
+                android:clickable="true"
+                android:rotation="0"
+                android:background="@android:color/white"
+                android:layout_weight="80" />
+
+            <view
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                class="android.support.v4.widget.Space"
+                android:id="@+id/view4"
+                android:layout_weight="10" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
