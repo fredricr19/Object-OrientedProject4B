@@ -62,7 +62,7 @@ class shogiPiece extends SurfaceView {
         shogiPaint.setColor(0xFFD2B48C);
 
         shogiOut.setStyle(Paint.Style.STROKE);
-        shogiOut.setStrokeWidth(5);
+        shogiOut.setStrokeWidth(2);
 
         Path shogiPiece = new Path();
         shogiPiece.reset();
@@ -112,6 +112,8 @@ class shogiPiece extends SurfaceView {
     }
 
     public void drawUserPieces(Canvas canvas){
+        String[] zed = pieces[7];
+
         /*---------Pawns---------*/
         for(int i = 0; i < 9; i++){
             position((i+1)*start+i*PANEL_SIZE, start, PANEL_SIZE, pieces[7]);
@@ -126,39 +128,24 @@ class shogiPiece extends SurfaceView {
         position(8*start+7*PANEL_SIZE, 3*start+PANEL_SIZE, PANEL_SIZE, pieces[1]);
         drawShogiPiece(canvas);
 
+        /*---------Bottom Row---------*/
         int y = 5*start+2*PANEL_SIZE;
+        for(int i = 1; i <= 9; i++){
+            if(i == 1 || i == 9){
+                zed = pieces[6]; //Lance
+            }else if(i == 2 || i == 8){
+                zed = pieces[5]; //Knight
+            }else if(i == 3 || i == 7){
+                zed = pieces[4]; //Silver
+            }else if(i == 4 || i == 6){
+                zed = pieces[3]; //Gold
+            }else if(i == 5){
+                zed = pieces[0]; //King
+            }
 
-        /*---------Lance---------*/
-        position(start, y, PANEL_SIZE, pieces[6]);
-        drawShogiPiece(canvas);
-
-        position(9*start+8*PANEL_SIZE, y, PANEL_SIZE, pieces[6]);
-        drawShogiPiece(canvas);
-
-        /*---------Knight---------*/
-        position(2*start+PANEL_SIZE, y, PANEL_SIZE, pieces[5]);
-        drawShogiPiece(canvas);
-
-        position(8*start+7*PANEL_SIZE, y, PANEL_SIZE, pieces[5]);
-        drawShogiPiece(canvas);
-
-        /*---------Silver---------*/
-        position(3*start+2*PANEL_SIZE, y, PANEL_SIZE, pieces[4]);
-        drawShogiPiece(canvas);
-
-        position(7*start+6*PANEL_SIZE, y, PANEL_SIZE, pieces[4]);
-        drawShogiPiece(canvas);
-
-        /*---------Gold---------*/
-        position(4*start+3*PANEL_SIZE, y, PANEL_SIZE, pieces[3]);
-        drawShogiPiece(canvas);
-
-        position(6*start+5*PANEL_SIZE, y, PANEL_SIZE, pieces[3]);
-        drawShogiPiece(canvas);
-
-        /*---------King---------*/
-        position(5*start+4*PANEL_SIZE, y, PANEL_SIZE, pieces[0]);
-        drawShogiPiece(canvas);
+            position(i*start+(i-1)*PANEL_SIZE, y, PANEL_SIZE, zed);
+            drawShogiPiece(canvas);
+        }
     }
 
     @Override
