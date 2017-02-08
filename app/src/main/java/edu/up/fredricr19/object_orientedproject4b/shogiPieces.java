@@ -26,7 +26,7 @@ class shogiPiece extends SurfaceView {
     Typeface type;
 
     String[] s;
-    String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "true"}, {"角", "行", "Bishop", "false"},
+    String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "false"},
             {"金", "將", "Gold", "false"},{"銀", "將", "Silver", "false"}, {"桂", "馬", "Knight", "false"},
             {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "false"}};
 
@@ -114,8 +114,11 @@ class shogiPiece extends SurfaceView {
 
         /*---------Pawns---------*/
         for(int i = 0; i < 9; i++){
+            if((i+1) % 3 == 0){ pieces[7][3] = "true"; }
+
             position((i+1)*start+i*PANEL_SIZE, start, PANEL_SIZE, pieces[7]);
             drawShogiPiece(canvas);
+            pieces[7][3] = "false";
         }
 
         /*---------Bishop---------*/
@@ -141,8 +144,13 @@ class shogiPiece extends SurfaceView {
                 zed = pieces[0]; //King
             }
 
+            if(i % 3 == 0){
+                zed[3] = "true";
+            }
+
             position(i*start+(i-1)*PANEL_SIZE, y, PANEL_SIZE, zed);
             drawShogiPiece(canvas);
+            zed[3] = "false";
         }
     }
 
