@@ -100,10 +100,8 @@ class shogiPiece extends SurfaceView {
             font = 3*font/4;
             if(s[2].length() > 2){
                 n = 3;
-            }else if(s[2].equals("silver")){
-                n = 5/8;
             }else{
-                n = 2;
+                n = 3*start;
             }
         }
 
