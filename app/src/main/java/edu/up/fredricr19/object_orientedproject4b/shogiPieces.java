@@ -21,12 +21,12 @@ class shogiPiece extends SurfaceView {
     int yText2;
     int font;
     float n = 1;
-    boolean shortHand = true;
+    boolean shortHand = false;
 
     Typeface type;
 
     String[] s;
-    String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "false"},
+    String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
             {"金", "將", "Gold", "false"},{"銀", "將", "Silver", "false"}, {"桂", "馬", "Knight", "false"},
             {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "false"}};
 
@@ -79,7 +79,7 @@ class shogiPiece extends SurfaceView {
         canvas.drawPath(shogiPiece, shogiPaint);
         canvas.drawPath(shogiPiece, shogiOut);
 
-        if(s[3].equals("true")){
+        if(s[2].equals("true")){
             shogiText.setColor(Color.RED);
         }else{
             shogiText.setColor(Color.BLACK);
@@ -90,23 +90,22 @@ class shogiPiece extends SurfaceView {
         }
 
         if(!shortHand) {
-            shogiText.setTextSize((float)font);
-            canvas.drawText(s[0], xText, yText1 - 6, shogiText);
-            canvas.drawText(s[1], xText, yText2 - 6, shogiText);
-            font = font/2;
+            shogiText.setTextSize((float)3*font/2);
+            canvas.drawText(s[0], xText - 9, yText1, shogiText);
+            canvas.drawText(s[1], xText - 9, yText2 + 16, shogiText);
         }else{
             shogiText.setTextSize((float)2*font);
-            canvas.drawText(s[0], xText - 3*start, (yText1+yText2)/2 + 6, shogiText);
-            font = 3*font/4;
+            canvas.drawText(s[0], xText - 3*start - 2, (yText1+yText2)/2 + 6, shogiText);
+
             if(s[2].length() > 2){
                 n = 3;
             }else{
                 n = 3*start;
             }
-        }
 
-        shogiText.setTextSize(font);
-        canvas.drawText(s[2], xText - (int)(n*s[2].length()), yText2 + (yText2 - yText1) - 6, shogiText);
+            shogiText.setTextSize(3*font/4);
+            canvas.drawText(s[2], xText - (int)(n*s[2].length()), yText2 + (yText2 - yText1) - 6, shogiText);
+        }
     }
 
     public void drawUserPieces(Canvas canvas){
@@ -114,11 +113,8 @@ class shogiPiece extends SurfaceView {
 
         /*---------Pawns---------*/
         for(int i = 0; i < 9; i++){
-            if((i+1) % 3 == 0){ pieces[7][3] = "true"; }
-
             position((i+1)*start+i*PANEL_SIZE, start, PANEL_SIZE, pieces[7]);
             drawShogiPiece(canvas);
-            pieces[7][3] = "false";
         }
 
         /*---------Bishop---------*/
@@ -144,13 +140,8 @@ class shogiPiece extends SurfaceView {
                 zed = pieces[0]; //King
             }
 
-            if(i % 3 == 0){
-                zed[3] = "true";
-            }
-
             position(i*start+(i-1)*PANEL_SIZE, y, PANEL_SIZE, zed);
             drawShogiPiece(canvas);
-            zed[3] = "false";
         }
     }
 
