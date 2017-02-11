@@ -15,6 +15,6 @@
         android:id="@+id/shogiPiece2"
         android:clickable="true"
         android:rotation="0"
-        android:background="@android:color/background_dark" />
+        android:background="@android:color/background_light" />
 
 </LinearLayout>

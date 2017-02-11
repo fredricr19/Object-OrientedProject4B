@@ -11,7 +11,7 @@ import android.view.SurfaceView;
 
 class shogiPiece extends SurfaceView {
     int PANEL_SIZE = 100;
-    static int start = 5;
+    int start = 5;
 
     float[] xCords;
     float[] yCords;
@@ -43,14 +43,8 @@ class shogiPiece extends SurfaceView {
     }
 
     public void position(int x, int y, int r, String[] piece){
-        float[] xC = {x-r/2, x-r/4, x, x+r/4, x+r/2};
-        float[] yC = {y+r/2, y-r/4, y-r/2, y-r/4, y+r/2};
-
-        /*float[] xC = {x, x+r/4, x+r/2, x+3*r/4, x+r};
-        float[] yC = {y+r, y+r/5, y, y+r/5, y+r};*/
-
-        xCords = xC;
-        yCords = yC;
+        xCords = new float[] {x-r/2, x-r/4, x, x+r/4, x+r/2};
+        yCords = new float[] {y+r/2, y-r/4, y-r/2, y-r/4, y+r/2};
 
         font = (r/4);
         radius = (float)r;
@@ -69,7 +63,7 @@ class shogiPiece extends SurfaceView {
 
         shogiPaint.setColor(0xFFD2B48C);
 
-        shogiOut.setColor(Color.WHITE);
+        shogiOut.setColor(Color.BLACK);
         shogiOut.setStyle(Paint.Style.STROKE);
         shogiOut.setStrokeWidth(3);
 
@@ -138,21 +132,21 @@ class shogiPiece extends SurfaceView {
 
         String[] zed = pieces[7];
 
-        /*---------Pawns---------*/
+        //Pawns
         for(int i = 0; i < 9; i++){
             position((i+1)*start+i*PANEL_SIZE, start, PANEL_SIZE, pieces[7]);
             drawShogiPiece(canvas);
         }
 
-        /*---------Bishop---------*/
+        //Bishop
         position(2*start+PANEL_SIZE, 3*start+PANEL_SIZE, PANEL_SIZE, pieces[2]);
         drawShogiPiece(canvas);
 
-        /*---------Rook---------*/
+        //Rook
         position(8*start+7*PANEL_SIZE, 3*start+PANEL_SIZE, PANEL_SIZE, pieces[1]);
         drawShogiPiece(canvas);
 
-        /*---------Bottom Row---------*/
+        //Bottom Row
         int y = 5*start+2*PANEL_SIZE;
         for(int i = 1; i <= 9; i++){
             if(i == 1 || i == 9){
@@ -172,8 +166,6 @@ class shogiPiece extends SurfaceView {
         }
     }
 
-    /*@Override
-    public void onDraw(Canvas canvas){
-        drawUserPieces(canvas);
-    }*/
+    //@Override
+    //public void onDraw(Canvas canvas){ drawUserPieces(canvas); }
 }
