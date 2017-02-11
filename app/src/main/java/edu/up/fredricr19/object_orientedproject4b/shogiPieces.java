@@ -13,21 +13,21 @@ class shogiPiece extends SurfaceView {
     int PANEL_SIZE = 100;
     static int start = 5;
 
-    static float[] xCords;
-    static float[] yCords;
-    static float radius;
-    static int xText;
-    static int yText1;
-    static int yText2;
-    static int font;
-    static float n = 1;
-    static boolean shortHand = false;
-    static boolean useEnglish = false;
+    float[] xCords;
+    float[] yCords;
+    float radius;
+    int xText;
+    int yText1;
+    int yText2;
+    int font;
+    float n = 1;
+    boolean shortHand = false;
+    boolean useEnglish = false;
 
-    static Typeface type;
+    Typeface type;
 
-    static String[] s;
-    static String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
+    String[] s;
+    String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
             {"金", "將", "Gold", "false"},{"銀", "將", "Silver", "false"}, {"桂", "馬", "Knight", "false"},
             {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "false"}};
 
@@ -42,7 +42,7 @@ class shogiPiece extends SurfaceView {
         type = Typeface.createFromAsset(context.getAssets(), "fonts/Helvetica.ttf");
     }
 
-    public static void position(int x, int y, int r, String[] piece){
+    public void position(int x, int y, int r, String[] piece){
         float[] xC = {x-r/2, x-r/4, x, x+r/4, x+r/2};
         float[] yC = {y+r/2, y-r/4, y-r/2, y-r/4, y+r/2};
 
@@ -62,7 +62,7 @@ class shogiPiece extends SurfaceView {
         s = piece;
     }
 
-    public static void drawShogiPiece(Canvas canvas){
+    public void drawShogiPiece(Canvas canvas){
         Paint shogiPaint = new Paint();
         Paint shogiOut = new Paint();
         Paint shogiText = new Paint();
