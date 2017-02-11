@@ -55,9 +55,9 @@ class shogiPiece extends SurfaceView {
         font = (r/4);
         radius = (float)r;
 
-        xText = x+r/2 - font/2;
-        yText1 = y+r/2;
-        yText2 = y+r/2 + font;
+        xText = x - font/2;
+        yText1 = y - r/4 + font;
+        yText2 = y - r/4 + 2*font;
 
         s = piece;
     }
