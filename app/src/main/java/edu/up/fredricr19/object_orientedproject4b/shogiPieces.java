@@ -43,8 +43,11 @@ class shogiPiece extends SurfaceView {
     }
 
     public static void position(int x, int y, int r, String[] piece){
-        float[] xC = {x, x+r/4, x+r/2, x+3*r/4, x+r};
-        float[] yC = {y+r, y+r/5, y, y+r/5, y+r};
+        float[] xC = {x-r/2, x-r/4, x, x+r/4, x+r/2};
+        float[] yC = {y+r/2, y-r/4, y-r/2, y-r/4, y+r/2};
+
+        /*float[] xC = {x, x+r/4, x+r/2, x+3*r/4, x+r};
+        float[] yC = {y+r, y+r/5, y, y+r/5, y+r};*/
 
         xCords = xC;
         yCords = yC;
