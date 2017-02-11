@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 class shogiPiece extends SurfaceView {
-    int PANEL_SIZE = 130;
+    int PANEL_SIZE = 100;
     int start = 5;
 
     float[] xCords;
@@ -22,6 +22,7 @@ class shogiPiece extends SurfaceView {
     int font;
     float n = 1;
     boolean shortHand = false;
+    boolean useEnglish = true;
 
     Typeface type;
 
@@ -29,6 +30,10 @@ class shogiPiece extends SurfaceView {
     String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
             {"金", "將", "Gold", "false"},{"銀", "將", "Silver", "false"}, {"桂", "馬", "Knight", "false"},
             {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "false"}};
+
+    String[][] englishPieces = {{"K", "King", "false"}, {"R", "Rook", "false"}, {"B", "Bishop", "false"},
+            {"G", "Gold", "false"},{"S", "Silver", "false"}, {"H", "Knight", "false"},
+            {"L", "Lance", "false"}, {"P", "Pawn", "false"}};
 
     public shogiPiece(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -79,7 +84,9 @@ class shogiPiece extends SurfaceView {
         canvas.drawPath(shogiPiece, shogiPaint);
         canvas.drawPath(shogiPiece, shogiOut);
 
-        if(s[2].equals("true")){
+        if(useEnglish && s[2].equals("true")){
+            shogiText.setColor(Color.RED);
+        }else if(!useEnglish && s[3].equals("true")){
             shogiText.setColor(Color.RED);
         }else{
             shogiText.setColor(Color.BLACK);
@@ -89,26 +96,35 @@ class shogiPiece extends SurfaceView {
             n = 1/2;
         }
 
-        if(!shortHand) {
-            shogiText.setTextSize((float)3*font/2);
-            canvas.drawText(s[0], xText - 9, yText1, shogiText);
-            canvas.drawText(s[1], xText - 9, yText2 + 16, shogiText);
+        if(useEnglish){
+            shogiText.setTextSize((float)5*font/2);
+            canvas.drawText(s[0], xText - 2*start, (yText1+yText2)/2 + 4*start, shogiText);
         }else{
-            shogiText.setTextSize((float)2*font);
-            canvas.drawText(s[0], xText - 3*start - 2, (yText1+yText2)/2 + 6, shogiText);
-
-            if(s[2].length() > 2){
-                n = 3;
+            if(!shortHand) {
+                shogiText.setTextSize((float)3*font/2);
+                canvas.drawText(s[0], xText - 9, yText1, shogiText);
+                canvas.drawText(s[1], xText - 9, yText2 + 16, shogiText);
             }else{
-                n = 3*start;
-            }
+                shogiText.setTextSize((float)2*font);
+                canvas.drawText(s[0], xText - 3*start - 2, (yText1+yText2)/2 + 6, shogiText);
 
-            shogiText.setTextSize(3*font/4);
-            canvas.drawText(s[2], xText - (int)(n*s[2].length()), yText2 + (yText2 - yText1) - 6, shogiText);
+                if(s[2].length() > 2){
+                    n = 3;
+                }else{
+                    n = 3*start;
+                }
+
+                shogiText.setTextSize(3*font/4);
+                canvas.drawText(s[2], xText - (int)(n*s[2].length()), yText2 + (yText2 - yText1) - 6, shogiText);
+            }
         }
     }
 
     public void drawUserPieces(Canvas canvas){
+        if(useEnglish){
+            pieces = englishPieces;
+        }
+
         String[] zed = pieces[7];
 
         /*---------Pawns---------*/

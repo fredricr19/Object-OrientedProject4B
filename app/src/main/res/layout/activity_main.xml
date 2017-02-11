@@ -15,65 +15,18 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:weightSum="100"
-            tools:ignore="NestedWeights">
-
-            <view
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                class="android.support.v4.widget.Space"
-                android:id="@+id/view1"
-                android:layout_weight="10" />
-
-            <edu.up.fredricr19.object_orientedproject4b.shogiPiece
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:id="@+id/shogiPiece"
-                android:clickable="true"
-                android:rotation="180"
-                android:background="@android:color/white"
-                android:layout_weight="80" />
-
-            <view
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                class="android.support.v4.widget.Space"
-                android:id="@+id/view2"
-                android:layout_weight="10" />
-        </LinearLayout>
-
-        <view
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            class="android.support.v4.widget.Space"
-            android:id="@+id/view0"
-            android:layout_weight="1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
         <view
             android:layout_width="match_parent"
             android:layout_height="0dp"
             class="android.support.v4.widget.Space"
             android:id="@+id/view5"
-            android:layout_weight="1" />
+            android:layout_weight="7" />
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:weightSum="100">
 
             <view
@@ -81,7 +34,7 @@
                 android:layout_height="match_parent"
                 class="android.support.v4.widget.Space"
                 android:id="@+id/view3"
-                android:layout_weight="10" />
+                android:layout_weight="17" />
 
             <edu.up.fredricr19.object_orientedproject4b.shogiPiece
                 android:layout_width="0dp"
@@ -90,14 +43,14 @@
                 android:clickable="true"
                 android:rotation="0"
                 android:background="@android:color/white"
-                android:layout_weight="80" />
+                android:layout_weight="65" />
 
             <view
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 class="android.support.v4.widget.Space"
                 android:id="@+id/view4"
-                android:layout_weight="10" />
+                android:layout_weight="17" />
         </LinearLayout>
 
     </LinearLayout>
