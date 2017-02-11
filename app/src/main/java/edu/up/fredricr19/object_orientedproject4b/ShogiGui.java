@@ -34,10 +34,6 @@ public class ShogiGui extends SurfaceView {
         BoardLine.setColor(0xFFFFFFFF);
         BoardLine.setStrokeWidth(6f);
 
-        //canvas.drawLine(50, 300, 1486, 300, BoardLine);
-        //canvas.drawLine(50, 300 + spaceDim, 1486, 300 + spaceDim, BoardLine);
-
-
         // draw vertical lines; start xy is top point, end xy is bottom point
         for(int i = 0; i < 10; i++){
             canvas.drawLine(topLeftX + i * spaceDim, topLeftY, topLeftX + i * spaceDim, topLeftY + 9 * spaceDim, BoardLine);
