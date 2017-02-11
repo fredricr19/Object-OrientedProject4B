@@ -11,23 +11,23 @@ import android.view.SurfaceView;
 
 class shogiPiece extends SurfaceView {
     int PANEL_SIZE = 100;
-    int start = 5;
+    static int start = 5;
 
-    float[] xCords;
-    float[] yCords;
-    float radius;
-    int xText;
-    int yText1;
-    int yText2;
-    int font;
-    float n = 1;
-    boolean shortHand = false;
-    boolean useEnglish = true;
+    static float[] xCords;
+    static float[] yCords;
+    static float radius;
+    static int xText;
+    static int yText1;
+    static int yText2;
+    static int font;
+    static float n = 1;
+    static boolean shortHand = false;
+    static boolean useEnglish = false;
 
-    Typeface type;
+    static Typeface type;
 
-    String[] s;
-    String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
+    static String[] s;
+    static String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
             {"金", "將", "Gold", "false"},{"銀", "將", "Silver", "false"}, {"桂", "馬", "Knight", "false"},
             {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "false"}};
 
@@ -39,10 +39,10 @@ class shogiPiece extends SurfaceView {
         super(context, attrs);
         setWillNotDraw(false);
 
-        type = Typeface.createFromAsset(context.getAssets(),"fonts/Helvetica.ttf");
+        type = Typeface.createFromAsset(context.getAssets(), "fonts/Helvetica.ttf");
     }
 
-    public void position(int x, int y, int r, String[] piece){
+    public static void position(int x, int y, int r, String[] piece){
         float[] xC = {x, x+r/4, x+r/2, x+3*r/4, x+r};
         float[] yC = {y+r, y+r/5, y, y+r/5, y+r};
 
@@ -59,15 +59,16 @@ class shogiPiece extends SurfaceView {
         s = piece;
     }
 
-    public void drawShogiPiece(Canvas canvas){
+    public static void drawShogiPiece(Canvas canvas){
         Paint shogiPaint = new Paint();
         Paint shogiOut = new Paint();
         Paint shogiText = new Paint();
 
         shogiPaint.setColor(0xFFD2B48C);
 
+        shogiOut.setColor(Color.WHITE);
         shogiOut.setStyle(Paint.Style.STROKE);
-        shogiOut.setStrokeWidth(2);
+        shogiOut.setStrokeWidth(3);
 
         Path shogiPiece = new Path();
         shogiPiece.reset();
@@ -98,12 +99,19 @@ class shogiPiece extends SurfaceView {
 
         if(useEnglish){
             shogiText.setTextSize((float)5*font/2);
-            canvas.drawText(s[0], xText - 2*start, (yText1+yText2)/2 + 4*start, shogiText);
+            canvas.drawText(s[0], xText - 2*start, (yText1+yText2)/2 + 3*start, shogiText);
+
+            if(s[0].equals("P")) {
+                int y = (yText1+yText2)/2 + 5*start;
+
+                shogiText.setStrokeWidth(5);
+                canvas.drawLine(xText-3*start, y, xText+7*start, y, shogiText);
+            }
         }else{
             if(!shortHand) {
                 shogiText.setTextSize((float)3*font/2);
-                canvas.drawText(s[0], xText - 9, yText1, shogiText);
-                canvas.drawText(s[1], xText - 9, yText2 + 16, shogiText);
+                canvas.drawText(s[0], xText - 8, yText1, shogiText);
+                canvas.drawText(s[1], xText - 8, yText2 + 16, shogiText);
             }else{
                 shogiText.setTextSize((float)2*font);
                 canvas.drawText(s[0], xText - 3*start - 2, (yText1+yText2)/2 + 6, shogiText);
@@ -161,8 +169,8 @@ class shogiPiece extends SurfaceView {
         }
     }
 
-    @Override
+    /*@Override
     public void onDraw(Canvas canvas){
         drawUserPieces(canvas);
-    }
+    }*/
 }
