@@ -27,7 +27,6 @@ public class ShogiGui extends SurfaceView {
         float topLeftX = 50;
         float topLeftY = 50;
         int pieceSize = 130;
-        int n = 10;
 
         //paint for lines
         Paint BoardLine = new Paint();
@@ -54,15 +53,15 @@ public class ShogiGui extends SurfaceView {
         int w = 0;
         for(int i = 1; i <= 17; i+=2){
             if(i == 1 || i == 17){
-                w = 6; //
+                w = 6; //Lance
             }else if(i == 3 || i == 15){
-                w = 5;
+                w = 5; //Knight
             }else if(i == 5 || i == 13){
-                w = 4;
+                w = 4; //Silver
             }else if(i == 7 || i == 11){
-                w = 3;
-            }else{
-                w = 0;
+                w = 3; //Gold
+            }else if(i == 9){
+                w = 0; //King
             }
 
             a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftY + 17*spaceDim/2), pieceSize, pieces[w], false);
