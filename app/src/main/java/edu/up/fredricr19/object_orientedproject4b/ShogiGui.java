@@ -8,17 +8,16 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 public class ShogiGui extends SurfaceView {
-    shogiPiece a;
+    shogiPieces a;
 
-    String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
-            {"金", "將", "Gold", "false"},{"銀", "將", "Silver", "false"}, {"桂", "馬", "Knight", "false"},
-            {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "false"}};
+    String[][] pieces = {{"王", "將", "King"}, {"飛", "車", "Rook"}, {"角", "行", "Bishop"}, {"金", "將", "Gold"},
+            {"銀", "將", "Silver"}, {"桂", "馬", "Knight"}, {"香", "車", "Lance"}, {"歩", "兵", "Pawn"}};
 
     public ShogiGui(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
 
-        a = new shogiPiece(context, attrs);
+        a = new shogiPieces(context, attrs);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class ShogiGui extends SurfaceView {
         a.drawShogiPiece(canvas, (int)(topLeftX + pieceSize/2) + n, (int)(topLeftY + pieceSize/2) + n, pieceSize, pieces[7], false);
 
         //Gold
-        a.drawShogiPiece(canvas, (int)(topLeftX + pieceSize/2) + n, (int)(topLeftY + 3*pieceSize/2) + 3*n, pieceSize, pieces[3], true);
+        a.drawShogiPiece(canvas, (int)(topLeftX + pieceSize/2) + n, (int)(topLeftY + 3*pieceSize/2) + 3*n, pieceSize, pieces[3], false);
 
         //Rook
         a.drawShogiPiece(canvas, (int)(5*topLeftX/2 + pieceSize) + 2*n, (int)(topLeftY + pieceSize/2) + n, pieceSize, pieces[1], false);
@@ -59,6 +58,4 @@ public class ShogiGui extends SurfaceView {
         //Knight
         a.drawShogiPiece(canvas, (int)(11*topLeftX/2 + 4*pieceSize/2) + 4*n, (int)(topLeftY + 5*pieceSize/2) + 5*10, pieceSize, pieces[5], false);
     }
-
-
 }

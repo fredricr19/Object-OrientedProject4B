@@ -9,23 +9,19 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
-class shogiPiece extends SurfaceView {
+public class shogiPieces extends SurfaceView {
     int PANEL_SIZE = 100;
 
-    boolean shortHand = true;
+    boolean shortHand = false;
     boolean useEnglish = false;
 
     Typeface type;
-
-    String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
-            {"金", "將", "Gold", "false"},{"銀", "將", "Silver", "false"}, {"桂", "馬", "Knight", "false"},
-            {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "false"}};
 
     String[][] englishPieces = {{"K", "King", "false"}, {"R", "Rook", "false"}, {"B", "Bishop", "false"},
             {"G", "Gold", "false"},{"S", "Silver", "false"}, {"H", "Knight", "false"},
             {"L", "Lance", "false"}, {"P", "Pawn", "false"}};
 
-    public shogiPiece(Context context, AttributeSet attrs){
+    public shogiPieces(Context context, AttributeSet attrs){
         super(context, attrs);
         setWillNotDraw(false);
 
@@ -71,9 +67,7 @@ class shogiPiece extends SurfaceView {
         canvas.drawPath(shogiPiece, shogiPaint);
         canvas.drawPath(shogiPiece, shogiOut);
 
-        if(useEnglish && s[2].equals("true") || promoted){
-            shogiText.setColor(Color.RED);
-        }else if(!useEnglish && s[3].equals("true") || promoted){
+        if(promoted){
             shogiText.setColor(Color.RED);
         }else{
             shogiText.setColor(Color.BLACK);
@@ -91,7 +85,7 @@ class shogiPiece extends SurfaceView {
                 int y1 = (yText1+yText2)/2 + 5*start;
 
                 shogiText.setStrokeWidth(5);
-                canvas.drawLine(xText-3*start, y1, xText+7*start, y1, shogiText);
+                canvas.drawLine(xText-2*start, y1, xText+7*start, y1, shogiText);
             }
         }else{
             if(!shortHand) {
