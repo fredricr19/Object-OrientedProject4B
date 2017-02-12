@@ -10,16 +10,13 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 public class shogiPieces extends SurfaceView {
-    int PANEL_SIZE = 100;
-
-    boolean shortHand = false;
+    boolean shortHand = true;
     boolean useEnglish = false;
 
     Typeface type;
 
-    String[][] englishPieces = {{"K", "King", "false"}, {"R", "Rook", "false"}, {"B", "Bishop", "false"},
-            {"G", "Gold", "false"},{"S", "Silver", "false"}, {"H", "Knight", "false"},
-            {"L", "Lance", "false"}, {"P", "Pawn", "false"}};
+    /*String[][] englishPieces = {{"K", "King"}, {"R", "Rook"}, {"B", "Bishop"}, {"G", "Gold"},
+            {"S", "Silver"}, {"H", "Knight"}, {"L", "Lance"}, {"P", "Pawn"}};*/
 
     public shogiPieces(Context context, AttributeSet attrs){
         super(context, attrs);

@@ -40,22 +40,32 @@ public class ShogiGui extends SurfaceView {
             canvas.drawLine(topLeftX, topLeftY + i * spaceDim, topLeftX + 9 * spaceDim, topLeftY+ i * spaceDim, BoardLine);
         }
 
-        //Pawn
-        a.drawShogiPiece(canvas, (int)(topLeftX + pieceSize/2) + n, (int)(topLeftY + pieceSize/2) + n, pieceSize, pieces[7], false);
-
-        //Gold
-        a.drawShogiPiece(canvas, (int)(topLeftX + pieceSize/2) + n, (int)(topLeftY + 3*pieceSize/2) + 3*n, pieceSize, pieces[3], false);
-
-        //Rook
-        a.drawShogiPiece(canvas, (int)(5*topLeftX/2 + pieceSize) + 2*n, (int)(topLeftY + pieceSize/2) + n, pieceSize, pieces[1], false);
-
-        //King
-        a.drawShogiPiece(canvas, (int)(5*topLeftX/2 + pieceSize) + 2*n, (int)(topLeftY + 3*pieceSize/2) + 3*10, pieceSize, pieces[0], false);
+        //Pawns
+        for(int i = 1; i <= 17; i+=2){
+            a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftY + 13*spaceDim/2), pieceSize, pieces[7], false);
+        }
 
         //Bishop
-        a.drawShogiPiece(canvas, (int)(8*topLeftX/2 + 3*pieceSize/2) + 3*n, (int)(topLeftY + 5*pieceSize/2) + 5*10, pieceSize, pieces[2], false);
+        a.drawShogiPiece(canvas, (int)(topLeftX + 3*spaceDim/2), (int)(topLeftY + 15*spaceDim/2), pieceSize, pieces[2], false);
 
-        //Knight
-        a.drawShogiPiece(canvas, (int)(11*topLeftX/2 + 4*pieceSize/2) + 4*n, (int)(topLeftY + 5*pieceSize/2) + 5*10, pieceSize, pieces[5], false);
+        //Rook
+        a.drawShogiPiece(canvas, (int)(topLeftX + 15*spaceDim/2), (int)(topLeftY + 15*spaceDim/2), pieceSize, pieces[1], false);
+
+        int w = 0;
+        for(int i = 1; i <= 17; i+=2){
+            if(i == 1 || i == 17){
+                w = 6; //
+            }else if(i == 3 || i == 15){
+                w = 5;
+            }else if(i == 5 || i == 13){
+                w = 4;
+            }else if(i == 7 || i == 11){
+                w = 3;
+            }else{
+                w = 0;
+            }
+
+            a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftY + 17*spaceDim/2), pieceSize, pieces[w], false);
+        }
     }
 }
