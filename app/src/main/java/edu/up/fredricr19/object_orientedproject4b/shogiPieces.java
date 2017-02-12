@@ -21,7 +21,7 @@ class shogiPiece extends SurfaceView {
     int yText2;
     int font;
     float n = 1;
-    boolean shortHand = false;
+    boolean shortHand = true;
     boolean useEnglish = false;
 
     Typeface type;

@@ -12,7 +12,7 @@ public class ShogiGui extends SurfaceView {
 
     String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
             {"金", "將", "Gold", "false"},{"銀", "將", "Silver", "false"}, {"桂", "馬", "Knight", "false"},
-            {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "true"}};
+            {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "false"}};
 
     public ShogiGui(Context context, AttributeSet attrs) {
         super(context, attrs);
