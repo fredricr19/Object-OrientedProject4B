@@ -11,22 +11,12 @@ import android.view.SurfaceView;
 
 class shogiPiece extends SurfaceView {
     int PANEL_SIZE = 100;
-    int start = 5;
 
-    float[] xCords;
-    float[] yCords;
-    float radius;
-    int xText;
-    int yText1;
-    int yText2;
-    int font;
-    float n = 1;
     boolean shortHand = true;
     boolean useEnglish = false;
 
     Typeface type;
 
-    String[] s;
     String[][] pieces = {{"王", "將", "King", "false"}, {"飛", "車", "Rook", "false"}, {"角", "行", "Bishop", "true"},
             {"金", "將", "Gold", "false"},{"銀", "將", "Silver", "false"}, {"桂", "馬", "Knight", "false"},
             {"香", "車", "Lance", "false"}, {"歩", "兵", "Pawn", "false"}};
@@ -42,21 +32,20 @@ class shogiPiece extends SurfaceView {
         type = Typeface.createFromAsset(context.getAssets(), "fonts/Helvetica.ttf");
     }
 
-    public void position(int x, int y, int r, String[] piece){
-        xCords = new float[] {x-r/2, x-r/4, x, x+r/4, x+r/2};
-        yCords = new float[] {y+r/2, y-r/4, y-r/2, y-r/4, y+r/2};
+    public void drawShogiPiece(Canvas canvas, int x, int y, int r, String[] s, boolean promoted){
+        float[] xCords = {x-r/2, x-r/4, x, x+r/4, x+r/2};
+        float[] yCords = new float[] {y+r/2, y-r/4, y-r/2, y-r/4, y+r/2};
 
-        font = (r/4);
-        radius = (float)r;
+        float n = 1;
 
-        xText = x - font/2;
-        yText1 = y - r/4 + font;
-        yText2 = y - r/4 + 2*font;
+        int font = (r/4);
+        int start = 5;
 
-        s = piece;
-    }
+        int xText = x - font/2;
+        int yText1 = y - r/4 + font;
+        int yText2 = y - r/4 + 2*font;
 
-    public void drawShogiPiece(Canvas canvas){
+
         Paint shogiPaint = new Paint();
         Paint shogiOut = new Paint();
         Paint shogiText = new Paint();
@@ -82,9 +71,9 @@ class shogiPiece extends SurfaceView {
         canvas.drawPath(shogiPiece, shogiPaint);
         canvas.drawPath(shogiPiece, shogiOut);
 
-        if(useEnglish && s[2].equals("true")){
+        if(useEnglish && s[2].equals("true") || promoted){
             shogiText.setColor(Color.RED);
-        }else if(!useEnglish && s[3].equals("true")){
+        }else if(!useEnglish && s[3].equals("true") || promoted){
             shogiText.setColor(Color.RED);
         }else{
             shogiText.setColor(Color.BLACK);
@@ -99,10 +88,10 @@ class shogiPiece extends SurfaceView {
             canvas.drawText(s[0], xText - 2*start, (yText1+yText2)/2 + 3*start, shogiText);
 
             if(s[0].equals("P")) {
-                int y = (yText1+yText2)/2 + 5*start;
+                int y1 = (yText1+yText2)/2 + 5*start;
 
                 shogiText.setStrokeWidth(5);
-                canvas.drawLine(xText-3*start, y, xText+7*start, y, shogiText);
+                canvas.drawLine(xText-3*start, y1, xText+7*start, y1, shogiText);
             }
         }else{
             if(!shortHand) {
@@ -124,48 +113,4 @@ class shogiPiece extends SurfaceView {
             }
         }
     }
-
-    public void drawUserPieces(Canvas canvas){
-        if(useEnglish){
-            pieces = englishPieces;
-        }
-
-        String[] zed = pieces[7];
-
-        //Pawns
-        for(int i = 0; i < 9; i++){
-            position((i+1)*start+i*PANEL_SIZE, start, PANEL_SIZE, pieces[7]);
-            drawShogiPiece(canvas);
-        }
-
-        //Bishop
-        position(2*start+PANEL_SIZE, 3*start+PANEL_SIZE, PANEL_SIZE, pieces[2]);
-        drawShogiPiece(canvas);
-
-        //Rook
-        position(8*start+7*PANEL_SIZE, 3*start+PANEL_SIZE, PANEL_SIZE, pieces[1]);
-        drawShogiPiece(canvas);
-
-        //Bottom Row
-        int y = 5*start+2*PANEL_SIZE;
-        for(int i = 1; i <= 9; i++){
-            if(i == 1 || i == 9){
-                zed = pieces[6]; //Lance
-            }else if(i == 2 || i == 8){
-                zed = pieces[5]; //Knight
-            }else if(i == 3 || i == 7){
-                zed = pieces[4]; //Silver
-            }else if(i == 4 || i == 6){
-                zed = pieces[3]; //Gold
-            }else if(i == 5){
-                zed = pieces[0]; //King
-            }
-
-            position(i*start+(i-1)*PANEL_SIZE, y, PANEL_SIZE, zed);
-            drawShogiPiece(canvas);
-        }
-    }
-
-    //@Override
-    //public void onDraw(Canvas canvas){ drawUserPieces(canvas); }
 }

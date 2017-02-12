@@ -41,23 +41,23 @@ public class ShogiGui extends SurfaceView {
             canvas.drawLine(topLeftX, topLeftY + i * spaceDim, topLeftX + 9 * spaceDim, topLeftY+ i * spaceDim, BoardLine);
         }
 
-        a.position((int)(topLeftX + pieceSize/2) + n, (int)(topLeftY + pieceSize/2) + 10, pieceSize, pieces[7]);
-        a.drawShogiPiece(canvas);
+        //Pawn
+        a.drawShogiPiece(canvas, (int)(topLeftX + pieceSize/2) + n, (int)(topLeftY + pieceSize/2) + n, pieceSize, pieces[7], false);
 
-        a.position((int)(topLeftX + pieceSize/2) + n, (int)(topLeftY + 3*pieceSize/2) + 3*10, pieceSize, pieces[3]);
-        a.drawShogiPiece(canvas);
+        //Gold
+        a.drawShogiPiece(canvas, (int)(topLeftX + pieceSize/2) + n, (int)(topLeftY + 3*pieceSize/2) + 3*n, pieceSize, pieces[3], true);
 
-        a.position((int)(5*topLeftX/2 + pieceSize) + 2*n, (int)(topLeftY + pieceSize/2) + 10, pieceSize, pieces[1]);
-        a.drawShogiPiece(canvas);
+        //Rook
+        a.drawShogiPiece(canvas, (int)(5*topLeftX/2 + pieceSize) + 2*n, (int)(topLeftY + pieceSize/2) + n, pieceSize, pieces[1], false);
 
-        a.position((int)(5*topLeftX/2 + pieceSize) + 2*n, (int)(topLeftY + 3*pieceSize/2) + 3*10, pieceSize, pieces[0]);
-        a.drawShogiPiece(canvas);
+        //King
+        a.drawShogiPiece(canvas, (int)(5*topLeftX/2 + pieceSize) + 2*n, (int)(topLeftY + 3*pieceSize/2) + 3*10, pieceSize, pieces[0], false);
 
-        a.position((int)(8*topLeftX/2 + 3*pieceSize/2) + 3*n, (int)(topLeftY + 5*pieceSize/2) + 5*10, pieceSize, pieces[2]);
-        a.drawShogiPiece(canvas);
+        //Bishop
+        a.drawShogiPiece(canvas, (int)(8*topLeftX/2 + 3*pieceSize/2) + 3*n, (int)(topLeftY + 5*pieceSize/2) + 5*10, pieceSize, pieces[2], false);
 
-        a.position((int)(11*topLeftX/2 + 4*pieceSize/2) + 4*n, (int)(topLeftY + 5*pieceSize/2) + 5*10, pieceSize, pieces[5]);
-        a.drawShogiPiece(canvas);
+        //Knight
+        a.drawShogiPiece(canvas, (int)(11*topLeftX/2 + 4*pieceSize/2) + 4*n, (int)(topLeftY + 5*pieceSize/2) + 5*10, pieceSize, pieces[5], false);
     }
 
 
