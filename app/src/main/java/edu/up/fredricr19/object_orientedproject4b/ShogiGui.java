@@ -80,9 +80,6 @@ public class ShogiGui extends SurfaceView {
         }
 
         drawSide(canvas, topLeftX, topLeftY, spaceDim, pieceSize, true);
-
         drawSide(canvas, topLeftX, topLeftY, spaceDim, pieceSize, false);
-
-        a.drawShogiPiece(canvas, (int)(topLeftX + 9*spaceDim/2), (int)(topLeftY + 9*spaceDim/2), pieceSize, pieces[7], false, true);
     }
 }
