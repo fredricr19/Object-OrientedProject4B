@@ -61,7 +61,7 @@ public class ShogiGui extends SurfaceView {
                 }
             }
 
-            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), pieceSize, pieces[w], true, player);
+            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), pieceSize, pieces[w], false, player);
         }
     }
 
@@ -71,7 +71,7 @@ public class ShogiGui extends SurfaceView {
         float spaceDim = 150;
         float topLeftX = 50;
         float topLeftY = 50;
-        int pieceSize = 100;
+        int pieceSize = 110;
 
         //paint for lines
         Paint BoardLine = new Paint();
@@ -86,5 +86,7 @@ public class ShogiGui extends SurfaceView {
 
         drawSide(canvas, topLeftX, topLeftY, spaceDim, pieceSize, true);
         drawSide(canvas, topLeftX, topLeftY, spaceDim, pieceSize, false);
+
+        a.drawShogiPiece(canvas, (int)(topLeftX + 9*spaceDim/2), (int)(topLeftY + 9*spaceDim/2), pieceSize, pieces[7], true, true);
     }
 }

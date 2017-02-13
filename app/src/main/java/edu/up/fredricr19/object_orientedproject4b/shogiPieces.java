@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 public class shogiPieces extends SurfaceView {
-    boolean shortHand = false;
+    boolean shortHand = true;
     boolean useEnglish = false;
 
     Typeface type;
