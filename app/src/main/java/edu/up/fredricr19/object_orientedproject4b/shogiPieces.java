@@ -47,7 +47,7 @@ public class shogiPieces extends SurfaceView {
 
         shogiOut.setColor(Color.BLACK);
         shogiOut.setStyle(Paint.Style.STROKE);
-        shogiOut.setStrokeWidth(3);
+        shogiOut.setStrokeWidth(4);
 
         Path shogiPiece = new Path();
         shogiPiece.reset();
