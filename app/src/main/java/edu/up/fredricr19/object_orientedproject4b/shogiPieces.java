@@ -10,13 +10,13 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 public class shogiPieces extends SurfaceView {
-    boolean shortHand = false;
+    boolean shortHand = true;
     boolean useEnglish = false;
 
     Typeface type;
 
-    /*String[][] englishPieces = {{"K", "King"}, {"R", "Rook"}, {"B", "Bishop"}, {"G", "Gold"},
-            {"S", "Silver"}, {"H", "Knight"}, {"L", "Lance"}, {"P", "Pawn"}};*/
+    /*String[][] pieces = {{"王", "將", "King"}, {"飛", "車", "Rook"}, {"角", "行", "Bishop"}, {"金", "將", "Gold"},
+            {"銀", "將", "Silver"}, {"桂", "馬", "Knight"}, {"香", "車", "Lance"}, {"歩", "兵", "Pawn"}};*/
 
     public shogiPieces(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -24,7 +24,7 @@ public class shogiPieces extends SurfaceView {
         type = Typeface.createFromAsset(context.getAssets(), "fonts/Helvetica.ttf");
     }
 
-    public void drawShogiPiece(Canvas canvas, int x, int y, int r, String[] s, boolean promoted){
+    public void drawShogiPiece(Canvas canvas, int x, int y, int r, String[] s, boolean promoted, boolean player){
         float[] xCords = {x-r/2, x-r/4, x, x+r/4, x+r/2};
         float[] yCords = new float[] {y+r/2, y-r/4, y-r/2, y-r/4, y+r/2};
 
@@ -60,6 +60,10 @@ public class shogiPieces extends SurfaceView {
 
         shogiText.setTypeface(type);
 
+        if(!player){
+            canvas.rotate(180f, x, y);
+        }
+
         canvas.drawPath(shogiPiece, shogiPaint);
         canvas.drawPath(shogiPiece, shogiOut);
 
@@ -71,9 +75,15 @@ public class shogiPieces extends SurfaceView {
 
         if(useEnglish){
             shogiText.setTextSize((float)5*font/2);
-            canvas.drawText(s[0], xText - 2*start, (yText1+yText2)/2 + 3*start, shogiText);
 
-            if(s[0].equals("P")) {
+            if(s[2].substring(0, 1).equals("L")){
+                canvas.drawText(s[2].substring(0, 1), xText - start, (yText1+yText2)/2 + 3*start, shogiText);
+            }else{
+                canvas.drawText(s[2].substring(0, 1), xText - 2*start, (yText1+yText2)/2 + 3*start, shogiText);
+            }
+
+
+            if(s[2].equals("Pawn")) {
                 int y1 = (yText1+yText2)/2 + 5*start;
 
                 shogiText.setStrokeWidth(5);
@@ -91,7 +101,7 @@ public class shogiPieces extends SurfaceView {
                 if(s[2].equals("Silver")){
                     n = 2;
                 }else if(s[2].equals("Pawn")){
-                    n = 3.99;
+                    n = 3.95;
                 }else if(s[2].equals("Bishop") || s[2].equals("Rook")){
                     n = 3.5;
                 }else if(s[2].equals("Lance")){
@@ -105,6 +115,9 @@ public class shogiPieces extends SurfaceView {
                 shogiText.setTextSize(3*font/4);
                 canvas.drawText(s[2], xText - (int)(n*s[2].length()), yText2 + (yText2 - yText1) - 6, shogiText);
             }
+        }
+        if(!player){
+            canvas.rotate(180f, x, y);
         }
     }
 }

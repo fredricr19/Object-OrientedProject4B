@@ -13,8 +13,6 @@ public class ShogiGui extends SurfaceView {
     String[][] pieces = {{"王", "將", "King"}, {"飛", "車", "Rook"}, {"角", "行", "Bishop"}, {"金", "將", "Gold"},
             {"銀", "將", "Silver"}, {"桂", "馬", "Knight"}, {"香", "車", "Lance"}, {"歩", "兵", "Pawn"}};
 
-    boolean[] all = {false, false, false, false, false, false, false};
-
     public ShogiGui(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
@@ -36,14 +34,14 @@ public class ShogiGui extends SurfaceView {
 
         for(int i = 1; i <= 17; i+=2){
             w = 1;
-            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + p*spaceDim/2), pieceSize, pieces[w], all[w]);
+            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + p*spaceDim/2), pieceSize, pieces[7], false, player);
 
             if(i == 3){
                 w = 2;
-                a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieceSize, pieces[w], all[w]);
+                a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieceSize, pieces[w], true, player);
             }else if(i == 15){
                 w = 1;
-                a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieceSize, pieces[w], all[w]);
+                a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieceSize, pieces[w], false, player);
             }
 
             if(i == 1 || i == 17){
@@ -58,7 +56,7 @@ public class ShogiGui extends SurfaceView {
                 w = 0; //King
             }
 
-            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), pieceSize, pieces[w], all[w]);
+            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), pieceSize, pieces[w], false, player);
         }
     }
 
@@ -68,7 +66,7 @@ public class ShogiGui extends SurfaceView {
         float spaceDim = 150;
         float topLeftX = 50;
         float topLeftY = 50;
-        int pieceSize = 130;
+        int pieceSize = 100;
 
         //paint for lines
         Paint BoardLine = new Paint();
@@ -83,7 +81,6 @@ public class ShogiGui extends SurfaceView {
 
         drawSide(canvas, topLeftX, topLeftY, spaceDim, pieceSize, true);
 
-        canvas.rotate(180f, topLeftX + 9*spaceDim/2, topLeftY + 3*spaceDim/2);
         drawSide(canvas, topLeftX, topLeftY, spaceDim, pieceSize, false);
     }
 }
