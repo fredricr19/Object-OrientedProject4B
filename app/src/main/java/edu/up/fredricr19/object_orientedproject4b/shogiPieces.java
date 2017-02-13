@@ -87,7 +87,7 @@ public class shogiPieces extends SurfaceView {
                 int y1 = (yText1+yText2)/2 + 5*start;
 
                 shogiText.setStrokeWidth(5);
-                canvas.drawLine(xText-2*start, y1, xText+7*start, y1, shogiText);
+                canvas.drawLine(xText-2*start, y1, xText+6*start, y1, shogiText);
             }
         }else{
             if(!shortHand) {
@@ -96,16 +96,18 @@ public class shogiPieces extends SurfaceView {
                 canvas.drawText(s[1], xText - 8, yText2 + 16, shogiText);
             }else{
                 shogiText.setTextSize((float)2*font);
-                canvas.drawText(s[0], xText - 3*start - 2, (yText1+yText2)/2 + 6, shogiText);
+                canvas.drawText(s[0], xText - 3*start, (yText1+yText2)/2 + 6, shogiText);
 
                 if(s[2].equals("Silver")){
                     n = 2;
                 }else if(s[2].equals("Pawn")){
-                    n = 3.95;
+                    n = 3;
+                }else if(s[2].equals("Knight")){
+                    n = 2.8;
                 }else if(s[2].equals("Bishop") || s[2].equals("Rook")){
-                    n = 3.5;
+                    n = 3;
                 }else if(s[2].equals("Lance")){
-                    n = 3.75;
+                    n = 3;
                 }else if(s[2].equals("King") || s[2].equals("Gold")){
                     n = 2.5;
                 }else{
