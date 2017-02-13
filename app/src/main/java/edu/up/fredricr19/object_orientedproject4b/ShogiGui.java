@@ -10,8 +10,9 @@ import android.view.SurfaceView;
 public class ShogiGui extends SurfaceView {
     shogiPieces a;
 
-    String[][] pieces = {{"王", "將", "King"}, {"飛", "車", "Rook"}, {"角", "行", "Bishop"}, {"金", "將", "Gold"},
-            {"銀", "將", "Silver"}, {"桂", "馬", "Knight"}, {"香", "車", "Lance"}, {"歩", "兵", "Pawn"}};
+    String[][] pieces = {{"王", "將", "王", "King"}, {"飛", "車", "飛", "Rook"}, {"角", "行", "角", "Bishop"},
+            {"金", "將", "金", "Gold"}, {"銀", "將", "銀", "Silver"}, {"桂", "馬", "桂", "Knight"},
+            {"香", "車", "香", "Lance"}, {"歩", "兵", "歩", "Pawn"}, {"玉", "將", "玉", "King"}};
 
     public ShogiGui(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -41,7 +42,7 @@ public class ShogiGui extends SurfaceView {
                 a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieceSize, pieces[w], false, player);
             }else if(i == 15){
                 w = 1;
-                a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieceSize, pieces[w], false, player);
+                a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieceSize, pieces[w], true, player);
             }
 
             if(i == 1 || i == 17){
@@ -53,10 +54,14 @@ public class ShogiGui extends SurfaceView {
             }else if(i == 7 || i == 11){
                 w = 3; //Gold
             }else if(i == 9){
-                w = 0; //King
+                if(player) {
+                    w = 8; //King (Higher Ranked)
+                }else{
+                    w = 0; //King (Lower Ranked)
+                }
             }
 
-            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), pieceSize, pieces[w], false, player);
+            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), pieceSize, pieces[w], true, player);
         }
     }
 
@@ -66,7 +71,7 @@ public class ShogiGui extends SurfaceView {
         float spaceDim = 150;
         float topLeftX = 50;
         float topLeftY = 50;
-        int pieceSize = 120;
+        int pieceSize = 100;
 
         //paint for lines
         Paint BoardLine = new Paint();

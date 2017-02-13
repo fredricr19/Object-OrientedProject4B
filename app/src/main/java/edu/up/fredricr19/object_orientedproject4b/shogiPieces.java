@@ -10,13 +10,17 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 public class shogiPieces extends SurfaceView {
-    boolean shortHand = true;
+    boolean shortHand = false;
     boolean useEnglish = false;
 
     Typeface type;
 
-    /*String[][] pieces = {{"王", "將", "King"}, {"飛", "車", "Rook"}, {"角", "行", "Bishop"}, {"金", "將", "Gold"},
-            {"銀", "將", "Silver"}, {"桂", "馬", "Knight"}, {"香", "車", "Lance"}, {"歩", "兵", "Pawn"}};*/
+    /*String[][] pieces = {{"王", "將", "王", "King"}, {"飛", "車", "飛", "Rook"}, {"角", "行", "角", "Bishop"},
+            {"金", "將", "金", "Gold"}, {"銀", "將", "銀", "Silver"}, {"桂", "馬", "桂", "Knight"},
+            {"香", "車", "香", "Lance"}, {"歩", "兵", "歩", "Pawn"}, {"玉", "將", "玉", "King"}};*/
+
+    String[][] promotedPieces = {{"", "", "", "King"}, {"龍", "王", "龍", "Rook"}, {"龍", "馬", "馬", "Bishop"}, {"", "", "", "Gold"},
+            {"成", "銀", "全", "Silver"}, {"成", "桂", "圭", "Knight"}, {"成", "香", "杏", "Lance"}, {"と", "金", "と", "Pawn"}};
 
     public shogiPieces(Context context, AttributeSet attrs){
         super(context, attrs);
@@ -29,6 +33,7 @@ public class shogiPieces extends SurfaceView {
         float[] yCords = new float[] {y+r/2, y-r/4, y-r/2, y-r/4, y+r/2};
 
         double n;
+        float a = 0;
 
         int font = (r/4);
         int start = 5;
@@ -37,6 +42,11 @@ public class shogiPieces extends SurfaceView {
         int yText1 = y - r/4 + font;
         int yText2 = y - r/4 + 2*font;
 
+        for(int i = 0; i < promotedPieces.length; i++){
+            if(s[3].equals(promotedPieces[i][3]) && promoted && !s[3].equals("King") && !s[3].equals("Gold")){
+                s = promotedPieces[i];
+            }
+        }
 
         Paint shogiPaint = new Paint();
         Paint shogiOut = new Paint();
@@ -67,7 +77,7 @@ public class shogiPieces extends SurfaceView {
         canvas.drawPath(shogiPiece, shogiPaint);
         canvas.drawPath(shogiPiece, shogiOut);
 
-        if(promoted){
+        if(promoted && !s[3].equals("King") && !s[3].equals("Gold")){
             shogiText.setColor(Color.RED);
         }else{
             shogiText.setColor(Color.BLACK);
@@ -76,14 +86,14 @@ public class shogiPieces extends SurfaceView {
         if(useEnglish){
             shogiText.setTextSize((float)5*font/2);
 
-            if(s[2].substring(0, 1).equals("L")){
-                canvas.drawText(s[2].substring(0, 1), xText - start, (yText1+yText2)/2 + 3*start, shogiText);
+            if(s[3].substring(0, 1).equals("L")){
+                canvas.drawText(s[3].substring(0, 1), xText - start, (yText1+yText2)/2 + 3*start, shogiText);
             }else{
-                canvas.drawText(s[2].substring(0, 1), xText - 2*start, (yText1+yText2)/2 + 3*start, shogiText);
+                canvas.drawText(s[3].substring(0, 1), xText - 2*start, (yText1+yText2)/2 + 3*start, shogiText);
             }
 
 
-            if(s[2].equals("Pawn")) {
+            if(s[3].equals("Pawn")) {
                 int y1 = (yText1+yText2)/2 + 5*start;
 
                 shogiText.setStrokeWidth(5);
@@ -95,27 +105,33 @@ public class shogiPieces extends SurfaceView {
                 canvas.drawText(s[0], xText - 8, yText1, shogiText);
                 canvas.drawText(s[1], xText - 8, yText2 + 16, shogiText);
             }else{
-                shogiText.setTextSize((float)2*font);
-                canvas.drawText(s[0], xText - 3*start, (yText1+yText2)/2 + 6, shogiText);
+                if(promoted){
+                    a = 3;
+                }
 
-                if(s[2].equals("Silver")){
+                shogiText.setTextSize((float)2*font);
+                canvas.drawText(s[2], xText - 3*start + a, (yText1+yText2)/2 + 6, shogiText);
+
+                if(s[3].equals("Silver")){
                     n = 2;
-                }else if(s[2].equals("Pawn")){
+                }else if(s[3].equals("Pawn")){
                     n = 3;
-                }else if(s[2].equals("Knight")){
+                }else if(s[3].equals("Knight")){
                     n = 2.8;
-                }else if(s[2].equals("Bishop") || s[2].equals("Rook")){
-                    n = 3;
-                }else if(s[2].equals("Lance")){
-                    n = 3;
-                }else if(s[2].equals("King") || s[2].equals("Gold")){
+                }else if(s[3].equals("Bishop")){
+                    n = 2.5;
+                }else if(s[3].equals("Rook")){
+                    n = 2;
+                }else if(s[3].equals("Lance")){
+                    n = 2.5;
+                }else if(s[3].equals("King") || s[3].equals("Gold")){
                     n = 2.5;
                 }else{
                     n = 3;
                 }
 
                 shogiText.setTextSize(3*font/4);
-                canvas.drawText(s[2], xText - (int)(n*s[2].length()), yText2 + (yText2 - yText1) - 6, shogiText);
+                canvas.drawText(s[3], xText - (int)(n*s[3].length()), yText2 + (yText2 - yText1) - 6, shogiText);
             }
         }
         if(!player){
