@@ -29,7 +29,7 @@ public class shogiPieces extends SurfaceView {
         float[] xCords = {x-r/2, x-r/4, x, x+r/4, x+r/2};
         float[] yCords = new float[] {y+r/2, y-r/4, y-r/2, y-r/4, y+r/2};
 
-        double n = 1;
+        double n;
 
         int font = (r/4);
         int start = 5;
@@ -70,10 +70,6 @@ public class shogiPieces extends SurfaceView {
             shogiText.setColor(Color.BLACK);
         }
 
-        if(s[2].length() == 4 || s[2].length() == 5){
-            n = 1/2;
-        }
-
         if(useEnglish){
             shogiText.setTextSize((float)5*font/2);
             canvas.drawText(s[0], xText - 2*start, (yText1+yText2)/2 + 3*start, shogiText);
@@ -96,7 +92,7 @@ public class shogiPieces extends SurfaceView {
                 if(s[2].equals("Silver")){
                     n = 2;
                 }else if(s[2].equals("Pawn")){
-                    n = 4;
+                    n = 3.95;
                 }else if(s[2].equals("King") || s[2].equals("Gold")){
                     n = 2.5;
                 }else{
@@ -104,7 +100,7 @@ public class shogiPieces extends SurfaceView {
                 }
 
                 shogiText.setTextSize(3*font/4);
-                canvas.drawText(s[2], xText - (int)n*s[2].length() + 2, yText2 + (yText2 - yText1) - 6, shogiText);
+                canvas.drawText(s[2], xText - (int)n*s[2].length(), yText2 + (yText2 - yText1) - 6, shogiText);
             }
         }
     }

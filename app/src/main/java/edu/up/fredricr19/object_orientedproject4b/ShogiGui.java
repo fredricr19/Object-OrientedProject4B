@@ -20,6 +20,44 @@ public class ShogiGui extends SurfaceView {
         a = new shogiPieces(context, attrs);
     }
 
+    public void drawSide(Canvas canvas, float topLeftX, float topLeftY, float spaceDim, int pieceSize, boolean player){
+        int p = 1;
+        int m = 3;
+        int l = 5;
+
+        int w = 0;
+
+        if(player){
+            p = 13;
+            m = 15;
+            l = 17;
+        }
+
+        for(int i = 1; i <= 17; i+=2){
+            a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftX + p*spaceDim/2), pieceSize, pieces[7], false);
+
+            if(i == 3){
+                a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftY + m*spaceDim/2), pieceSize, pieces[2], false);
+            }else if(i == 15){
+                a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftY + m*spaceDim/2), pieceSize, pieces[1], true);
+            }
+
+            if(i == 1 || i == 17){
+                w = 6; //Lance
+            }else if(i == 3 || i == 15){
+                w = 5; //Knight
+            }else if(i == 5 || i == 13){
+                w = 4; //Silver
+            }else if(i == 7 || i == 11){
+                w = 3; //Gold
+            }else if(i == 9){
+                w = 0; //King
+            }
+
+            a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftY + l*spaceDim/2), pieceSize, pieces[w], false);
+        }
+    }
+
     @Override
     public void onDraw(Canvas canvas) {
         //length/width of a space on the board
@@ -39,32 +77,10 @@ public class ShogiGui extends SurfaceView {
             canvas.drawLine(topLeftX, topLeftY + i * spaceDim, topLeftX + 9 * spaceDim, topLeftY+ i * spaceDim, BoardLine);
         }
 
-        //Pawns
-        for(int i = 1; i <= 17; i+=2){
-            a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftY + 13*spaceDim/2), pieceSize, pieces[7], false);
-        }
 
-        //Bishop
-        a.drawShogiPiece(canvas, (int)(topLeftX + 3*spaceDim/2), (int)(topLeftY + 15*spaceDim/2), pieceSize, pieces[2], true);
+        drawSide(canvas, topLeftX, topLeftY, spaceDim, pieceSize, true);
 
-        //Rook
-        a.drawShogiPiece(canvas, (int)(topLeftX + 15*spaceDim/2), (int)(topLeftY + 15*spaceDim/2), pieceSize, pieces[1], false);
-
-        int w = 0;
-        for(int i = 1; i <= 17; i+=2){
-            if(i == 1 || i == 17){
-                w = 6; //Lance
-            }else if(i == 3 || i == 15){
-                w = 5; //Knight
-            }else if(i == 5 || i == 13){
-                w = 4; //Silver
-            }else if(i == 7 || i == 11){
-                w = 3; //Gold
-            }else if(i == 9){
-                w = 0; //King
-            }
-
-            a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftY + 17*spaceDim/2), pieceSize, pieces[w], false);
-        }
+        canvas.rotate(180f, topLeftX + 9*spaceDim/2, topLeftY + 3*spaceDim/2);
+        drawSide(canvas, topLeftX, topLeftY, spaceDim, pieceSize, false);
     }
 }
