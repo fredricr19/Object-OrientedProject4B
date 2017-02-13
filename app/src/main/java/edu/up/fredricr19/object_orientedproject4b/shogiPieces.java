@@ -92,7 +92,11 @@ public class shogiPieces extends SurfaceView {
                 if(s[2].equals("Silver")){
                     n = 2;
                 }else if(s[2].equals("Pawn")){
-                    n = 3.95;
+                    n = 3.99;
+                }else if(s[2].equals("Bishop") || s[2].equals("Rook")){
+                    n = 3.5;
+                }else if(s[2].equals("Lance")){
+                    n = 3.75;
                 }else if(s[2].equals("King") || s[2].equals("Gold")){
                     n = 2.5;
                 }else{
@@ -100,7 +104,7 @@ public class shogiPieces extends SurfaceView {
                 }
 
                 shogiText.setTextSize(3*font/4);
-                canvas.drawText(s[2], xText - (int)n*s[2].length(), yText2 + (yText2 - yText1) - 6, shogiText);
+                canvas.drawText(s[2], xText - (int)(n*s[2].length()), yText2 + (yText2 - yText1) - 6, shogiText);
             }
         }
     }
