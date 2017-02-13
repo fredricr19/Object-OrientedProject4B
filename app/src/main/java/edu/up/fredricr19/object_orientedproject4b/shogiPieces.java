@@ -10,7 +10,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 
 public class shogiPieces extends SurfaceView {
-    boolean shortHand = true;
+    boolean shortHand = false;
     boolean useEnglish = false;
 
     Typeface type;
@@ -20,7 +20,6 @@ public class shogiPieces extends SurfaceView {
 
     public shogiPieces(Context context, AttributeSet attrs){
         super(context, attrs);
-        setWillNotDraw(false);
 
         type = Typeface.createFromAsset(context.getAssets(), "fonts/Helvetica.ttf");
     }

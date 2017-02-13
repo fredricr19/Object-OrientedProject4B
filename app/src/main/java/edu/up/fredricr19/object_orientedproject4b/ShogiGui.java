@@ -13,6 +13,8 @@ public class ShogiGui extends SurfaceView {
     String[][] pieces = {{"王", "將", "King"}, {"飛", "車", "Rook"}, {"角", "行", "Bishop"}, {"金", "將", "Gold"},
             {"銀", "將", "Silver"}, {"桂", "馬", "Knight"}, {"香", "車", "Lance"}, {"歩", "兵", "Pawn"}};
 
+    boolean[] all = {false, false, false, false, false, false, false};
+
     public ShogiGui(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
@@ -20,7 +22,7 @@ public class ShogiGui extends SurfaceView {
         a = new shogiPieces(context, attrs);
     }
 
-    public void drawSide(Canvas canvas, float topLeftX, float topLeftY, float spaceDim, int pieceSize, boolean player){
+    public void drawSide(Canvas canvas, float x, float y, float spaceDim, int pieceSize, boolean player){
         int w = 0;
         int p = 1;
         int m = 3;
@@ -33,12 +35,15 @@ public class ShogiGui extends SurfaceView {
         }
 
         for(int i = 1; i <= 17; i+=2){
-            a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftX + p*spaceDim/2), pieceSize, pieces[7], false);
+            w = 1;
+            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + p*spaceDim/2), pieceSize, pieces[w], all[w]);
 
             if(i == 3){
-                a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftY + m*spaceDim/2), pieceSize, pieces[2], false);
+                w = 2;
+                a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieceSize, pieces[w], all[w]);
             }else if(i == 15){
-                a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftY + m*spaceDim/2), pieceSize, pieces[1], false);
+                w = 1;
+                a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieceSize, pieces[w], all[w]);
             }
 
             if(i == 1 || i == 17){
@@ -53,7 +58,7 @@ public class ShogiGui extends SurfaceView {
                 w = 0; //King
             }
 
-            a.drawShogiPiece(canvas, (int)(topLeftX + i*spaceDim/2), (int)(topLeftY + l*spaceDim/2), pieceSize, pieces[w], false);
+            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), pieceSize, pieces[w], all[w]);
         }
     }
 
