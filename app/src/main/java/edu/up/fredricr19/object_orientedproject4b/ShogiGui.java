@@ -30,7 +30,7 @@ public class ShogiGui extends SurfaceView {
         }
 
         for(int i = 1; i <= 17; i+=2){
-            arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + p*spaceDim/2), false, "Pawn"));
+            arr.add(new shogiPieces((x + i*spaceDim/2), (y + p*spaceDim/2), "Pawn"));
 
             if(i == 1 || i == 17){
                 w = "Lance"; //Lance
@@ -44,11 +44,11 @@ public class ShogiGui extends SurfaceView {
                 w = "King"; //King
             }
 
-            arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), false, w));
+            arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), w));
         }
 
-        arr.add(new shogiPieces((int)(x + 3*spaceDim/2), (int)(y + m*spaceDim/2), false, "Bishop"));
-        arr.add(new shogiPieces((int)(x + 15*spaceDim/2), (int)(y + m*spaceDim/2), false, "Rook"));
+        arr.add(new shogiPieces((int)(x + 3*spaceDim/2), (int)(y + m*spaceDim/2), "Bishop"));
+        arr.add(new shogiPieces((int)(x + 15*spaceDim/2), (int)(y + m*spaceDim/2), "Rook"));
     }
 
     @Override

@@ -22,14 +22,13 @@ public class shogiPieces {
             {"", "", "", "Gold"}, {"成", "銀", "全", "Silver"}, {"成", "桂", "圭", "Knight"}, {"成", "香", "杏", "Lance"},
             {"と", "金", "と", "Pawn"}};
 
-    public shogiPieces(float initX, float initY, boolean p, String piece){
+    public shogiPieces(float initX, float initY, String piece){
         this.x = (int)initX; //Defines x value
         this.y = (int)initY; //Defines y value
-        this.promoted = p; //Defines whether piece is promoted
 
-        for(String[] pen15 : pieces){
-            if(pen15[3].equals(piece)){
-                this.s = pen15; //Defines the piece
+        for(String[] aww : pieces){
+            if(aww[3].equals(piece)){
+                this.s = aww; //Defines the piece
                 break;
             }
         }
