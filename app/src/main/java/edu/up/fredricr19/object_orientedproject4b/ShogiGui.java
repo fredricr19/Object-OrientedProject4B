@@ -76,7 +76,7 @@ public class ShogiGui extends SurfaceView {
         drawSide(topLeftX, topLeftY, spaceDim, true);
         for(shogiPieces piece : arr){
             if(i % 2 == 0){
-                piece.promotePiece(true);
+                piece.promotePiece(false);
             }
             piece.drawShogiPiece(canvas, true);
             i+=1;

@@ -103,7 +103,6 @@ public class shogiPieces {
                 canvas.drawText(s[3].substring(0, 1), xText - 2*start, (yText1+yText2)/2 + 3*start, shogiText);
             }
 
-
             if(s[3].equals("Pawn")) {
                 int y1 = (yText1+yText2)/2 + 5*start;
 
@@ -118,6 +117,8 @@ public class shogiPieces {
             }else{
                 if(promoted){
                     a = 3;
+                }else{
+                    a = 1;
                 }
 
                 shogiText.setTextSize((float)2*font);
