@@ -67,11 +67,7 @@ public class shogiPieces {
 
         shogiPaint.setColor(0xFFD2B48C);
 
-        if(promoted){
-            shogiOut.setColor(Color.RED);
-        }else{
-            shogiOut.setColor(Color.BLACK);
-        }
+        shogiOut.setColor(Color.BLACK);
         shogiOut.setStyle(Paint.Style.STROKE);
         shogiOut.setStrokeWidth(4);
 
