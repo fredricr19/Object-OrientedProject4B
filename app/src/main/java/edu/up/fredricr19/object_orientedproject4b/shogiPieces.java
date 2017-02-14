@@ -52,7 +52,7 @@ public class shogiPieces {
         float[] yCords = new float[] {y+ r /2, y- r /4, y- r /2, y- r /4, y+ r /2}; //yCords for outline
 
         double n;  //Helps center english words if shortHand = true
-        float a = 0; //Does something --- leave this alone
+        float a = 2; //Does something --- leave this alone
 
         int font = (r/4); //Sets font
         int start = 5; //A sort of padding
@@ -117,8 +117,6 @@ public class shogiPieces {
             }else{
                 if(promoted){
                     a = 3;
-                }else{
-                    a = 1;
                 }
 
                 shogiText.setTextSize((float)2*font);
