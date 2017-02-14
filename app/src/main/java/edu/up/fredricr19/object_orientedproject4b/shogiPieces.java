@@ -6,7 +6,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 
 public class shogiPieces {
-    private boolean shortHand = false; //Denotes whether to use short hand (i.e. single character+english) --- Leave Here
+    private boolean shortHand = true; //Denotes whether to use short hand (i.e. single character+english) --- Leave Here
     private boolean useEnglish = false; //Denotes whether to use english letter --- Leave Here
 
     private int x;
@@ -34,8 +34,8 @@ public class shogiPieces {
         }
     }
 
-    public void promotePiece(boolean p){
-        this.promoted = p;
+    public void promotePiece(boolean pro){
+        this.promoted = pro && !s[3].equals("King") && !s[3].equals("Gold");
     }
 
     //Draws Piece
@@ -66,7 +66,11 @@ public class shogiPieces {
 
         shogiPaint.setColor(0xFFD2B48C);
 
-        shogiOut.setColor(Color.BLACK);
+        if(promoted){
+            shogiOut.setColor(Color.RED);
+        }else{
+            shogiOut.setColor(Color.BLACK);
+        }
         shogiOut.setStyle(Paint.Style.STROKE);
         shogiOut.setStrokeWidth(4);
 
@@ -87,7 +91,7 @@ public class shogiPieces {
         canvas.drawPath(shogiPiece, shogiPaint);
         canvas.drawPath(shogiPiece, shogiOut);
 
-        if(promoted && !s[3].equals("King") && !s[3].equals("Gold")){
+        if(promoted){
             shogiText.setColor(Color.RED);
         }else{
             shogiText.setColor(Color.BLACK);

@@ -29,9 +29,14 @@ public class ShogiGui extends SurfaceView {
             l = 17;
         }
 
-        for(int i = 1; i <= 17; i+=2){
-            arr.add(new shogiPieces((x + i*spaceDim/2), (y + p*spaceDim/2), "Pawn"));
+        for(int i = 1; i <= 17; i+=2) {
+            arr.add(new shogiPieces((x + i * spaceDim / 2), (y + p * spaceDim / 2), "Pawn"));
+        }
 
+        arr.add(new shogiPieces((int)(x + 3*spaceDim/2), (int)(y + m*spaceDim/2), "Bishop"));
+        arr.add(new shogiPieces((int)(x + 15*spaceDim/2), (int)(y + m*spaceDim/2), "Rook"));
+
+        for(int i = 1; i<=17; i+=2){
             if(i == 1 || i == 17){
                 w = "Lance"; //Lance
             }else if(i == 3 || i == 15){
@@ -46,17 +51,14 @@ public class ShogiGui extends SurfaceView {
 
             arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), w));
         }
-
-        arr.add(new shogiPieces((int)(x + 3*spaceDim/2), (int)(y + m*spaceDim/2), "Bishop"));
-        arr.add(new shogiPieces((int)(x + 15*spaceDim/2), (int)(y + m*spaceDim/2), "Rook"));
     }
 
     @Override
     public void onDraw(Canvas canvas) {
         //length/width of a space on the board
         float spaceDim = 150;
-        float topLeftX = 50;
-        float topLeftY = 50;
+        float topLeftX = 90;
+        float topLeftY = 100;
 
         //paint for lines
         Paint BoardLine = new Paint();
@@ -69,9 +71,15 @@ public class ShogiGui extends SurfaceView {
             canvas.drawLine(topLeftX, topLeftY + i * spaceDim, topLeftX + 9 * spaceDim, topLeftY+ i * spaceDim, BoardLine);
         }
 
+        int i = 0;
+
         drawSide(topLeftX, topLeftY, spaceDim, true);
         for(shogiPieces piece : arr){
+            if(i % 2 == 0){
+                piece.promotePiece(true);
+            }
             piece.drawShogiPiece(canvas, true);
+            i+=1;
         }
 
         arr = new ArrayList<>();
@@ -80,6 +88,5 @@ public class ShogiGui extends SurfaceView {
         for(shogiPieces piece : arr){
             piece.drawShogiPiece(canvas, false);
         }
-
     }
 }
