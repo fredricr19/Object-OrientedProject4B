@@ -36,6 +36,13 @@ public class shogiPieces {
 
     public void promotePiece(boolean pro){
         this.promoted = pro && !s[3].equals("King") && !s[3].equals("Gold");
+        if(promoted){
+            for(String[] aww : promotedPieces){
+                if(s[3].equals(aww[3]) && promoted){
+                    s = aww;
+                }
+            }
+        }
     }
 
     //Draws Piece
@@ -53,12 +60,6 @@ public class shogiPieces {
         int xText = x - font/2;
         int yText1 = y - r /4 + font;
         int yText2 = y - r /4 + 2*font;
-
-        for(String[] aww : promotedPieces){
-            if(s[3].equals(aww[3]) && promoted && !s[3].equals("King") && !s[3].equals("Gold")){
-                s = aww;
-            }
-        }
 
         Paint shogiPaint = new Paint();
         Paint shogiOut = new Paint();
