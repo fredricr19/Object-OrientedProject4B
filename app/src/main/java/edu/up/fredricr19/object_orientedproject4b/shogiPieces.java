@@ -1,19 +1,18 @@
 package edu.up.fredricr19.object_orientedproject4b;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.Typeface;
-import android.util.AttributeSet;
-import android.view.SurfaceView;
 
-public class shogiPieces extends SurfaceView {
+public class shogiPieces {
     boolean shortHand = true;
     boolean useEnglish = false;
 
-    Typeface type;
+    int x;
+    int y;
+    int r = 100;
+    String[] s;
 
     /*String[][] pieces = {{"王", "將", "王", "King"}, {"飛", "車", "飛", "Rook"}, {"角", "行", "角", "Bishop"},
             {"金", "將", "金", "Gold"}, {"銀", "將", "銀", "Silver"}, {"桂", "馬", "桂", "Knight"},
@@ -22,13 +21,13 @@ public class shogiPieces extends SurfaceView {
     String[][] promotedPieces = {{"", "", "", "King"}, {"龍", "王", "龍", "Rook"}, {"龍", "馬", "馬", "Bishop"}, {"", "", "", "Gold"},
             {"成", "銀", "全", "Silver"}, {"成", "桂", "圭", "Knight"}, {"成", "香", "杏", "Lance"}, {"と", "金", "と", "Pawn"}};
 
-    public shogiPieces(Context context, AttributeSet attrs){
-        super(context, attrs);
-
-        type = Typeface.createFromAsset(context.getAssets(), "fonts/Helvetica.ttf");
+    public shogiPieces(int initX, int initY, String[] piece){
+        this.x = initX;
+        this.y = initY;
+        this.s = piece;
     }
 
-    public void drawShogiPiece(Canvas canvas, int x, int y, int r, String[] s, boolean promoted, boolean player){
+    public void drawShogiPiece(Canvas canvas, boolean promoted, boolean player){
         float[] xCords = {x-r/2, x-r/4, x, x+r/4, x+r/2};
         float[] yCords = new float[] {y+r/2, y-r/4, y-r/2, y-r/4, y+r/2};
 
@@ -67,8 +66,6 @@ public class shogiPieces extends SurfaceView {
         shogiPiece.lineTo(xCords[4], yCords[4]);
         shogiPiece.lineTo(xCords[0], yCords[0]);
         shogiPiece.lineTo(xCords[1], yCords[1]);
-
-        shogiText.setTypeface(type);
 
         if(!player){
             canvas.rotate(180f, x, y);

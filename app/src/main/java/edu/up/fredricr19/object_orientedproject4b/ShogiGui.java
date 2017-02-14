@@ -7,8 +7,12 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
 public class ShogiGui extends SurfaceView {
     shogiPieces a;
+
+    ArrayList<shogiPieces> arr = new ArrayList<shogiPieces>();
 
     String[][] pieces = {{"王", "將", "王", "King"}, {"飛", "車", "飛", "Rook"}, {"角", "行", "角", "Bishop"},
             {"金", "將", "金", "Gold"}, {"銀", "將", "銀", "Silver"}, {"桂", "馬", "桂", "Knight"},
@@ -17,12 +21,10 @@ public class ShogiGui extends SurfaceView {
     public ShogiGui(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
-
-        a = new shogiPieces(context, attrs);
     }
 
-    public void drawSide(Canvas canvas, float x, float y, float spaceDim, int pieceSize, boolean player){
-        int w;
+    public void drawSide(float x, float y, float spaceDim, boolean player){
+        int w = 1;
         int p = 5;
         int m = 3;
         int l = 1;
@@ -34,15 +36,12 @@ public class ShogiGui extends SurfaceView {
         }
 
         for(int i = 1; i <= 17; i+=2){
-            w = 1;
-            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + p*spaceDim/2), pieceSize, pieces[7], false, player);
+            arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + p*spaceDim/2), pieces[7]));
 
             if(i == 3){
-                w = 2;
-                a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieceSize, pieces[w], false, player);
+                arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieces[2]));
             }else if(i == 15){
-                w = 1;
-                a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieceSize, pieces[w], true, player);
+                arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieces[1]));
             }
 
             if(i == 1 || i == 17){
@@ -54,14 +53,10 @@ public class ShogiGui extends SurfaceView {
             }else if(i == 7 || i == 11){
                 w = 3; //Gold
             }else if(i == 9){
-                if(player) {
-                    w = 8; //King (Higher Ranked)
-                }else{
-                    w = 0; //King (Lower Ranked)
-                }
+                w = 0;
             }
 
-            a.drawShogiPiece(canvas, (int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), pieceSize, pieces[w], false, player);
+            arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), pieces[w]));
         }
     }
 
@@ -71,7 +66,6 @@ public class ShogiGui extends SurfaceView {
         float spaceDim = 150;
         float topLeftX = 50;
         float topLeftY = 50;
-        int pieceSize = 110;
 
         //paint for lines
         Paint BoardLine = new Paint();
@@ -84,9 +78,17 @@ public class ShogiGui extends SurfaceView {
             canvas.drawLine(topLeftX, topLeftY + i * spaceDim, topLeftX + 9 * spaceDim, topLeftY+ i * spaceDim, BoardLine);
         }
 
-        drawSide(canvas, topLeftX, topLeftY, spaceDim, pieceSize, true);
-        drawSide(canvas, topLeftX, topLeftY, spaceDim, pieceSize, false);
+        drawSide(topLeftX, topLeftY, spaceDim, true);
+        for(shogiPieces piece : arr){
+            piece.drawShogiPiece(canvas, false, true);
+        }
 
-        a.drawShogiPiece(canvas, (int)(topLeftX + 9*spaceDim/2), (int)(topLeftY + 9*spaceDim/2), pieceSize, pieces[7], true, true);
+        arr = new ArrayList<shogiPieces>();
+
+        drawSide(topLeftX, topLeftY, spaceDim, false);
+        for(shogiPieces piece : arr){
+            piece.drawShogiPiece(canvas, false, false);
+        }
+
     }
 }
