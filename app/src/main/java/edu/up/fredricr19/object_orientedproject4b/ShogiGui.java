@@ -10,9 +10,7 @@ import android.view.SurfaceView;
 import java.util.ArrayList;
 
 public class ShogiGui extends SurfaceView {
-    shogiPieces a;
-
-    ArrayList<shogiPieces> arr = new ArrayList<shogiPieces>();
+    ArrayList<shogiPieces> arr = new ArrayList<>();
 
     String[][] pieces = {{"王", "將", "王", "King"}, {"飛", "車", "飛", "Rook"}, {"角", "行", "角", "Bishop"},
             {"金", "將", "金", "Gold"}, {"銀", "將", "銀", "Silver"}, {"桂", "馬", "桂", "Knight"},
@@ -38,12 +36,6 @@ public class ShogiGui extends SurfaceView {
         for(int i = 1; i <= 17; i+=2){
             arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + p*spaceDim/2), pieces[7]));
 
-            if(i == 3){
-                arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieces[2]));
-            }else if(i == 15){
-                arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + m*spaceDim/2), pieces[1]));
-            }
-
             if(i == 1 || i == 17){
                 w = 6; //Lance
             }else if(i == 3 || i == 15){
@@ -58,6 +50,9 @@ public class ShogiGui extends SurfaceView {
 
             arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), pieces[w]));
         }
+
+        arr.add(new shogiPieces((int)(x + 3*spaceDim/2), (int)(y + m*spaceDim/2), pieces[2]));
+        arr.add(new shogiPieces((int)(x + 15*spaceDim/2), (int)(y + m*spaceDim/2), pieces[1]));
     }
 
     @Override
@@ -83,7 +78,7 @@ public class ShogiGui extends SurfaceView {
             piece.drawShogiPiece(canvas, false, true);
         }
 
-        arr = new ArrayList<shogiPieces>();
+        arr = new ArrayList<>();
 
         drawSide(topLeftX, topLeftY, spaceDim, false);
         for(shogiPieces piece : arr){

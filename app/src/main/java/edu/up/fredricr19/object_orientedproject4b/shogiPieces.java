@@ -6,20 +6,20 @@ import android.graphics.Paint;
 import android.graphics.Path;
 
 public class shogiPieces {
-    boolean shortHand = true;
-    boolean useEnglish = false;
+    private boolean shortHand = true;
+    private boolean useEnglish = false;
 
-    int x;
-    int y;
-    int r = 100;
-    String[] s;
+    private int x;
+    private int y;
+    private String[] s;
 
     /*String[][] pieces = {{"王", "將", "王", "King"}, {"飛", "車", "飛", "Rook"}, {"角", "行", "角", "Bishop"},
             {"金", "將", "金", "Gold"}, {"銀", "將", "銀", "Silver"}, {"桂", "馬", "桂", "Knight"},
             {"香", "車", "香", "Lance"}, {"歩", "兵", "歩", "Pawn"}, {"玉", "將", "玉", "King"}};*/
 
-    String[][] promotedPieces = {{"", "", "", "King"}, {"龍", "王", "龍", "Rook"}, {"龍", "馬", "馬", "Bishop"}, {"", "", "", "Gold"},
-            {"成", "銀", "全", "Silver"}, {"成", "桂", "圭", "Knight"}, {"成", "香", "杏", "Lance"}, {"と", "金", "と", "Pawn"}};
+    private String[][] promotedPieces = {{"", "", "", "King"}, {"龍", "王", "龍", "Rook"}, {"龍", "馬", "馬", "Bishop"},
+            {"", "", "", "Gold"}, {"成", "銀", "全", "Silver"}, {"成", "桂", "圭", "Knight"}, {"成", "香", "杏", "Lance"},
+            {"と", "金", "と", "Pawn"}};
 
     public shogiPieces(int initX, int initY, String[] piece){
         this.x = initX;
@@ -28,18 +28,19 @@ public class shogiPieces {
     }
 
     public void drawShogiPiece(Canvas canvas, boolean promoted, boolean player){
-        float[] xCords = {x-r/2, x-r/4, x, x+r/4, x+r/2};
-        float[] yCords = new float[] {y+r/2, y-r/4, y-r/2, y-r/4, y+r/2};
+        int r = 100;
+        float[] xCords = {x- r /2, x- r /4, x, x+ r /4, x+ r /2};
+        float[] yCords = new float[] {y+ r /2, y- r /4, y- r /2, y- r /4, y+ r /2};
 
         double n;
         float a = 0;
 
-        int font = (r/4);
+        int font = (r /4);
         int start = 5;
 
         int xText = x - font/2;
-        int yText1 = y - r/4 + font;
-        int yText2 = y - r/4 + 2*font;
+        int yText1 = y - r /4 + font;
+        int yText2 = y - r /4 + 2*font;
 
         for(int i = 0; i < promotedPieces.length; i++){
             if(s[3].equals(promotedPieces[i][3]) && promoted && !s[3].equals("King") && !s[3].equals("Gold")){
