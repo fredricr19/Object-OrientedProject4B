@@ -6,11 +6,12 @@ import android.graphics.Paint;
 import android.graphics.Path;
 
 public class shogiPieces {
-    private boolean shortHand = false;
-    private boolean useEnglish = false;
+    private boolean shortHand = false; //Denotes whether to use short hand (i.e. single character+english) --- Leave Here
+    private boolean useEnglish = false; //Denotes whether to use english letter --- Leave Here
 
     private int x;
     private int y;
+    private boolean promoted = false;
     private String[] s;
 
     private String[][] pieces = {{"王", "將", "王", "King"}, {"飛", "車", "飛", "Rook"}, {"角", "行", "角", "Bishop"},
@@ -21,27 +22,34 @@ public class shogiPieces {
             {"", "", "", "Gold"}, {"成", "銀", "全", "Silver"}, {"成", "桂", "圭", "Knight"}, {"成", "香", "杏", "Lance"},
             {"と", "金", "と", "Pawn"}};
 
-    public shogiPieces(int initX, int initY, String piece){
-        this.x = initX;
-        this.y = initY;
-        for(String[] aww : pieces){
-            if(aww[3].equals(piece)){
-                this.s = aww;
+    public shogiPieces(float initX, float initY, boolean p, String piece){
+        this.x = (int)initX; //Defines x value
+        this.y = (int)initY; //Defines y value
+        this.promoted = p; //Defines whether piece is promoted
+
+        for(String[] pen15 : pieces){
+            if(pen15[3].equals(piece)){
+                this.s = pen15; //Defines the piece
                 break;
             }
         }
     }
 
-    public void drawShogiPiece(Canvas canvas, boolean promoted, boolean player){
-        int r = 100;
-        float[] xCords = {x- r /2, x- r /4, x, x+ r /4, x+ r /2};
-        float[] yCords = new float[] {y+ r /2, y- r /4, y- r /2, y- r /4, y+ r /2};
+    public void promotePiece(boolean p){
+        this.promoted = p;
+    }
 
-        double n;
-        float a = 0;
+    //Draws Piece
+    public void drawShogiPiece(Canvas canvas, boolean player){
+        int r = 100; //Size of the piece
+        float[] xCords = {x- r /2, x- r /4, x, x+ r /4, x+ r /2}; //xCords for outline
+        float[] yCords = new float[] {y+ r /2, y- r /4, y- r /2, y- r /4, y+ r /2}; //yCords for outline
 
-        int font = (r /4);
-        int start = 5;
+        double n;  //Helps center english words if shortHand = true
+        float a = 0; //Does something --- leave this alone
+
+        int font = (r/4); //Sets font
+        int start = 5; //A sort of padding
 
         int xText = x - font/2;
         int yText1 = y - r /4 + font;
