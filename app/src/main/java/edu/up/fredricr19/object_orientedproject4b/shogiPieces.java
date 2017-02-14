@@ -6,25 +6,30 @@ import android.graphics.Paint;
 import android.graphics.Path;
 
 public class shogiPieces {
-    private boolean shortHand = true;
+    private boolean shortHand = false;
     private boolean useEnglish = false;
 
     private int x;
     private int y;
     private String[] s;
 
-    /*String[][] pieces = {{"王", "將", "王", "King"}, {"飛", "車", "飛", "Rook"}, {"角", "行", "角", "Bishop"},
+    private String[][] pieces = {{"王", "將", "王", "King"}, {"飛", "車", "飛", "Rook"}, {"角", "行", "角", "Bishop"},
             {"金", "將", "金", "Gold"}, {"銀", "將", "銀", "Silver"}, {"桂", "馬", "桂", "Knight"},
-            {"香", "車", "香", "Lance"}, {"歩", "兵", "歩", "Pawn"}, {"玉", "將", "玉", "King"}};*/
+            {"香", "車", "香", "Lance"}, {"歩", "兵", "歩", "Pawn"}};
 
     private String[][] promotedPieces = {{"", "", "", "King"}, {"龍", "王", "龍", "Rook"}, {"龍", "馬", "馬", "Bishop"},
             {"", "", "", "Gold"}, {"成", "銀", "全", "Silver"}, {"成", "桂", "圭", "Knight"}, {"成", "香", "杏", "Lance"},
             {"と", "金", "と", "Pawn"}};
 
-    public shogiPieces(int initX, int initY, String[] piece){
+    public shogiPieces(int initX, int initY, String piece){
         this.x = initX;
         this.y = initY;
-        this.s = piece;
+        for(String[] aww : pieces){
+            if(aww[3].equals(piece)){
+                this.s = aww;
+                break;
+            }
+        }
     }
 
     public void drawShogiPiece(Canvas canvas, boolean promoted, boolean player){
@@ -42,9 +47,9 @@ public class shogiPieces {
         int yText1 = y - r /4 + font;
         int yText2 = y - r /4 + 2*font;
 
-        for(int i = 0; i < promotedPieces.length; i++){
-            if(s[3].equals(promotedPieces[i][3]) && promoted && !s[3].equals("King") && !s[3].equals("Gold")){
-                s = promotedPieces[i];
+        for(String[] aww : promotedPieces){
+            if(s[3].equals(aww[3]) && promoted && !s[3].equals("King") && !s[3].equals("Gold")){
+                s = aww;
             }
         }
 

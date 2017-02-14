@@ -12,17 +12,13 @@ import java.util.ArrayList;
 public class ShogiGui extends SurfaceView {
     ArrayList<shogiPieces> arr = new ArrayList<>();
 
-    String[][] pieces = {{"王", "將", "王", "King"}, {"飛", "車", "飛", "Rook"}, {"角", "行", "角", "Bishop"},
-            {"金", "將", "金", "Gold"}, {"銀", "將", "銀", "Silver"}, {"桂", "馬", "桂", "Knight"},
-            {"香", "車", "香", "Lance"}, {"歩", "兵", "歩", "Pawn"}, {"玉", "將", "玉", "King"}};
-
     public ShogiGui(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
     }
 
     public void drawSide(float x, float y, float spaceDim, boolean player){
-        int w = 1;
+        String w = "Pawn";
         int p = 5;
         int m = 3;
         int l = 1;
@@ -34,25 +30,25 @@ public class ShogiGui extends SurfaceView {
         }
 
         for(int i = 1; i <= 17; i+=2){
-            arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + p*spaceDim/2), pieces[7]));
+            arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + p*spaceDim/2), "Pawn"));
 
             if(i == 1 || i == 17){
-                w = 6; //Lance
+                w = "Lance"; //Lance
             }else if(i == 3 || i == 15){
-                w = 5; //Knight
+                w = "Lance"; //Knight
             }else if(i == 5 || i == 13){
-                w = 4; //Silver
+                w = "Silver"; //Silver
             }else if(i == 7 || i == 11){
-                w = 3; //Gold
+                w = "Gold"; //Gold
             }else if(i == 9){
-                w = 0;
+                w = "King"; //King
             }
 
-            arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), pieces[w]));
+            arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), w));
         }
 
-        arr.add(new shogiPieces((int)(x + 3*spaceDim/2), (int)(y + m*spaceDim/2), pieces[2]));
-        arr.add(new shogiPieces((int)(x + 15*spaceDim/2), (int)(y + m*spaceDim/2), pieces[1]));
+        arr.add(new shogiPieces((int)(x + 3*spaceDim/2), (int)(y + m*spaceDim/2), "Bishop"));
+        arr.add(new shogiPieces((int)(x + 15*spaceDim/2), (int)(y + m*spaceDim/2), "Rook"));
     }
 
     @Override
