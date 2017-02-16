@@ -1,92 +1,236 @@
 package edu.up.fredricr19.object_orientedproject4b;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.SurfaceView;
+import android.view.View;
 
-import java.util.ArrayList;
+/**
+ * Created by Javier on 25-Jan-17.
+ */
 
-public class ShogiGui extends SurfaceView {
-    ArrayList<shogiPieces> arr = new ArrayList<>();
+public class ShogiGui extends SurfaceView implements View.OnTouchListener {
+
+
+    //array for drawing and managing pieces on the board
+    shogiPiece Pieces[][] = new shogiPiece[9][9];
+    Bitmap BoardBackground;
+
+    //top left corner of board lines; must be global for manipulating shogi pieces
+    //length/width of a space on the board
+    public static final float spaceDim = 150; //150 is good
+    public static final float backBoardTopLeftX = 20; //20 is good
+    public static final float backBoardTopLeftY = 100; //100 is good
+    public static final float topLeftX = backBoardTopLeftX + spaceDim / 2; //95 is good
+    public static final float topLeftY = backBoardTopLeftY + spaceDim; //350 is good
+    private int i, j; //iterators for all the loops
+    private boolean pieceIsSelected = false;
+    private boolean boardDrawn = false;
+
+
+    private int row, col; //for iterating and managing the Pieces array
 
     public ShogiGui(Context context, AttributeSet attrs) {
         super(context, attrs);
         setWillNotDraw(false);
+
+        BoardBackground = BitmapFactory.decodeResource(getResources(), R.drawable.shogi_board);
+        BoardBackground = Bitmap.createScaledBitmap(BoardBackground, (int) (10 * spaceDim), (int) (10 * spaceDim + spaceDim), false);
+
+
+        row = 4;
+        col = 4;
+        shogiPiece SilverPiece = new shogiPiece(row, col, "Silver");
+        Pieces[row][col] = SilverPiece;
+
+        row = 4;
+        col = 2;
+        shogiPiece bishopPiece = new shogiPiece(row, col, "Bishop");
+        Pieces[row][col] = bishopPiece;
+
+        row = 8;
+        col = 0;
+        shogiPiece LancePiece = new shogiPiece(row, col, "Lance");
+        Pieces[row][col] = LancePiece;
+
+        row = 7;
+        col = 7;
+        shogiPiece rookPiece = new shogiPiece(row, col, "Rook");
+        Pieces[row][col] = rookPiece;
+
+        row = 6;
+        col = 4;
+        shogiPiece pawnPiece = new shogiPiece(row, col, "Pawn");
+        Pieces[row][col] = pawnPiece;
+
+        row = 2;
+        col = 3;
+        shogiPiece knightPiece = new shogiPiece(row, col, "Knight");
+        Pieces[row][col] = knightPiece;
+
+        row = 7;
+        col = 3;
+        shogiPiece kingPiece = new shogiPiece(row, col, "King");
+        Pieces[row][col] = kingPiece;
+
+        row = 3;
+        col = 7;
+        shogiPiece goldPiece = new shogiPiece(row, col, "Gold");
+        Pieces[row][col] = goldPiece;
     }
 
-    public void drawSide(float x, float y, float spaceDim, boolean player){
-        String w = "Pawn";
-        int p = 5;
-        int m = 3;
-        int l = 1;
-
-        if(player){
-            p = 13;
-            m = 15;
-            l = 17;
-        }
-
-        for(int i = 1; i <= 17; i+=2) {
-            arr.add(new shogiPieces((x + i * spaceDim / 2), (y + p * spaceDim / 2), "Pawn"));
-        }
-
-        arr.add(new shogiPieces((int)(x + 3*spaceDim/2), (int)(y + m*spaceDim/2), "Bishop"));
-        arr.add(new shogiPieces((int)(x + 15*spaceDim/2), (int)(y + m*spaceDim/2), "Rook"));
-
-        for(int i = 1; i<=17; i+=2){
-            if(i == 1 || i == 17){
-                w = "Lance"; //Lance
-            }else if(i == 3 || i == 15){
-                w = "Lance"; //Knight
-            }else if(i == 5 || i == 13){
-                w = "Silver"; //Silver
-            }else if(i == 7 || i == 11){
-                w = "Gold"; //Gold
-            }else if(i == 9){
-                w = "King"; //King
-            }
-
-            arr.add(new shogiPieces((int)(x + i*spaceDim/2), (int)(y + l*spaceDim/2), w));
-        }
-    }
 
     @Override
-    public void onDraw(Canvas canvas) {
-        //length/width of a space on the board
-        float spaceDim = 150;
-        float topLeftX = 90;
-        float topLeftY = 100;
+    public void onDraw(Canvas canvas)
+    {
 
-        //paint for lines
+        //paint for the lines
         Paint BoardLine = new Paint();
-        BoardLine.setColor(Color.BLACK);
-        BoardLine.setStrokeWidth(6);
+        BoardLine.setColor(0xFF000000);
+        BoardLine.setStrokeWidth(6f);
 
-        // draw vertical lines; start xy is top point, end xy is bottom point
-        for(int i = 0; i < 10; i++){
+
+        //paint for circles
+        Paint CirclePaint = new Paint();
+        CirclePaint.setColor(0xFFFFFFFF);
+        CirclePaint.setStyle(Paint.Style.FILL);
+
+
+        //set touch listener for drawing pieces on the board
+        this.setOnTouchListener(this);
+
+
+        //long time = System.currentTimeMillis();
+
+
+        //draw Shogi board background
+        canvas.drawColor(Color.BLACK);
+        canvas.drawBitmap(BoardBackground, backBoardTopLeftX, backBoardTopLeftY, null);
+
+
+        //time = System.currentTimeMillis() - time;
+        //Log.i("Time to draw board", "" + time);
+
+
+        //draw vertical lines; start xy is top point, end xy is bottom point
+        for(i = 0; i < 10; i++) {
             canvas.drawLine(topLeftX + i * spaceDim, topLeftY, topLeftX + i * spaceDim, topLeftY + 9 * spaceDim, BoardLine);
             canvas.drawLine(topLeftX, topLeftY + i * spaceDim, topLeftX + 9 * spaceDim, topLeftY+ i * spaceDim, BoardLine);
         }
 
-        int i = 0;
 
-        drawSide(topLeftX, topLeftY, spaceDim, true);
-        for(shogiPieces piece : arr){
-            if(i % 2 == 0){
-                piece.promotePiece(true);
+        //draw pieces
+        for(i = 0; i < 9; i++) {
+            for(j = 0; j < 9; j++){
+                if(Pieces[i][j] != null){
+                    Pieces[i][j].drawShogiPiece(canvas, true);
+
+                    if(Pieces[i][j].getSelected())
+                        Pieces[i][j].drawMoves(canvas);
+                }
             }
-            piece.drawShogiPiece(canvas, true);
-            i+=1;
-        }
-
-        arr = new ArrayList<>();
-
-        drawSide(topLeftX, topLeftY, spaceDim, false);
-        for(shogiPieces piece : arr){
-            piece.drawShogiPiece(canvas, false);
         }
     }
+
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+
+        //dont do anything when dragging or lifting touch
+        if(event.getActionMasked() != MotionEvent.ACTION_DOWN)
+            return false;
+
+
+        //determine space that was tapped
+        for(row = 0; row < 9; row++)
+        {
+            if(event.getY() < topLeftY + (row + 1) * spaceDim) {
+
+                for (col = 0; col < 9; col++) {
+                    if(event.getX() < topLeftX + (col + 1) * spaceDim)
+                    {
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
+
+        //tapped space has no piece
+        if(Pieces[row][col] == null)
+            return false;
+
+
+        //select piece if not selected yet, deselect it if selected
+        if(Pieces[row][col].getSelected())
+        {
+            Pieces[row][col].setSelected(false);
+            pieceIsSelected = false;
+        }
+
+        else
+        {
+            Pieces[row][col].setSelected(true);
+            pieceIsSelected = true;
+        }
+
+
+        //redraw board with pieces updated
+        this.invalidate();
+
+        return true;
+
+
+
+
+
+        //------------------------------------------------------------------
+        //This is the code for drawing a piece in any space that is tapped
+        //------------------------------------------------------------------
+        /*
+        //when user presses down
+        if(event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+
+            //determine space that was tapped
+            for(row = 0; row < 9; row++)
+            {
+                if(event.getY() < topLeftY + (row + 1) * spaceDim) {
+
+                    for (col = 0; col < 9; col++) {
+                        if(event.getX() < topLeftX + (col + 1) * spaceDim)
+                        {
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+
+
+            //new shogi piece
+            ShogiPiece NewPiece = new ShogiPiece(topLeftX + col * spaceDim + spaceDim / 2, topLeftY + row * spaceDim + spaceDim / 2, "King");
+
+
+            //assign newly created piece to Pieces array
+            Pieces[row][col] = NewPiece;
+
+
+            //redraw board with pieces updated
+            this.invalidate();
+
+            return true;
+        }
+
+        */
+    }
+
+
+
 }
