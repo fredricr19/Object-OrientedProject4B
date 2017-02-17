@@ -26,7 +26,7 @@ public class shogiPiece {
 
     public shogiPiece(int initRow, int initCol, String piece){
         this.x = (int)(ShogiGui.topLeftX + initCol * ShogiGui.spaceDim + ShogiGui.spaceDim / 2); //Defines starting row
-        this.y = (int)(ShogiGui.topLeftY + initRow * ShogiGui.spaceDim + ShogiGui.spaceDim / 2);; //Defines starting col
+        this.y = (int)(ShogiGui.topLeftY + initRow * ShogiGui.spaceDim + ShogiGui.spaceDim / 2); //Defines starting col
 
         for(String[] aww : pieces){
             if(aww[3].equals(piece)){
