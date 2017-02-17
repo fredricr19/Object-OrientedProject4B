@@ -49,8 +49,8 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
         shogiPiece SilverPiece = new shogiPiece(row, col, "Silver");
         Pieces[row][col] = SilverPiece;
 
-        row = 4;
-        col = 2;
+        row = 3;
+        col = 3;
         shogiPiece bishopPiece = new shogiPiece(row, col, "Bishop");
         Pieces[row][col] = bishopPiece;
 
@@ -65,7 +65,7 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
         Pieces[row][col] = rookPiece;
 
         row = 6;
-        col = 4;
+        col = 6;
         shogiPiece pawnPiece = new shogiPiece(row, col, "Pawn");
         Pieces[row][col] = pawnPiece;
 
@@ -148,13 +148,10 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
 
 
         //determine space that was tapped
-        for(row = 0; row < 9; row++)
-        {
+        for(row = 0; row < 9; row++) {
             if(event.getY() < topLeftY + (row + 1) * spaceDim) {
-
                 for (col = 0; col < 9; col++) {
-                    if(event.getX() < topLeftX + (col + 1) * spaceDim)
-                    {
+                    if(event.getX() < topLeftX + (col + 1) * spaceDim){
                         break;
                     }
                 }
@@ -167,16 +164,21 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
         if(Pieces[row][col] == null)
             return false;
 
-
         //select piece if not selected yet, deselect it if selected
-        if(Pieces[row][col].getSelected())
-        {
+        if(Pieces[row][col].getSelected()){
             Pieces[row][col].setSelected(false);
             pieceIsSelected = false;
-        }
+        }else{
+            for(int i = 0; i < 9; i++){
+                for(int j = 0; j < 9; j++){
+                    if(Pieces[i][j] != null){
+                        if(Pieces[i][j].getSelected()){
+                            Pieces[i][j].setSelected(false);
+                        }
+                    }
+                }
+            }
 
-        else
-        {
             Pieces[row][col].setSelected(true);
             pieceIsSelected = true;
         }
