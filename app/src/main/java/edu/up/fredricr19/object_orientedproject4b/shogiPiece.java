@@ -40,9 +40,11 @@ public class shogiPiece {
         this.promoted = p;
     }
 
-    public void changePlayer(boolean p){
+    public void setPlayer(boolean p){
         this.player = p;
     }
+
+    public boolean getPlayer(){ return this.player; }
 
     //Draws Piece
     public void drawShogiPiece(Canvas canvas) {
