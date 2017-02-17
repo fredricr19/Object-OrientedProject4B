@@ -43,19 +43,56 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
         BoardBackground = BitmapFactory.decodeResource(getResources(), R.drawable.shogi_board);
         BoardBackground = Bitmap.createScaledBitmap(BoardBackground, (int) (10 * spaceDim), (int) (10 * spaceDim + spaceDim), false);
 
-        for(int row = 0; row < 4; row++){
-            for(int col = 0; col < 9; col++){
-                shogiPiece aPiece = new shogiPiece(row, col, "Pawn");
-                Pieces[row][col] = aPiece;
-            }
+        shogiPiece aPiece;
+        String w = "";
+
+        row = 2;
+        for(col = 0; col < 9; col++){
+            aPiece = new shogiPiece(row, col, "Pawn");
+            aPiece.changePlayer(false);
+            Pieces[row][col] = aPiece;
         }
 
-        for(int row = 4; row < 5; row++){
-            for(int col = 0; col < 4; col++){
-                shogiPiece aPiece = new shogiPiece(row, col, "Pawn");
-                Pieces[row][col] = aPiece;
+        row = row - 1;
+        col = 1;
+        aPiece = new shogiPiece(row, col, "Bishop");
+        aPiece.changePlayer(false);
+        Pieces[row][col] = aPiece;
 
+        col = 7;
+        aPiece = new shogiPiece(row, col, "Rook");
+        aPiece.changePlayer(false);
+        Pieces[row][col] = aPiece;
+
+        row = 6;
+        for(col = 0; col < 9; col++){
+            aPiece = new shogiPiece(row, col, "Pawn");
+            Pieces[row][col] = aPiece;
+        }
+
+        col = 1;
+        aPiece = new shogiPiece(row+1, col, "Bishop");
+        Pieces[row+1][col] = aPiece;
+
+        col = 7;
+        aPiece = new shogiPiece(row+1, col, "Rook");
+        Pieces[row+1][col] = aPiece;
+
+        for(col = 0; col < 9; col++){
+            if(col == 0 || col == 8){
+                w = "Lance";
+            }else if(col == 1 || col == 7){
+                w = "Knight";
+            }else if(col == 2 || col == 6){
+                w = "Silver";
+            }else if(col == 3 || col == 5){
+                w = "Gold";
+            }else{
+                w = "King";
             }
+
+            aPiece = new shogiPiece(row+2, col, w);
+            Pieces[row+2][col] = aPiece;
         }
     }
 
@@ -67,7 +104,6 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
         Paint BoardLine = new Paint();
         BoardLine.setColor(0xFF000000);
         BoardLine.setStrokeWidth(6f);
-
 
         //paint for circles
         Paint CirclePaint = new Paint();
@@ -101,7 +137,8 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
         for(i = 0; i < 9; i++) {
             for(j = 0; j < 9; j++){
                 if(Pieces[i][j] != null){
-                    Pieces[i][j].drawShogiPiece(canvas, true);
+                    //Pieces[i][j].changePlayer(false);
+                    Pieces[i][j].drawShogiPiece(canvas);
 
                     if(Pieces[i][j].getSelected())
                         Pieces[i][j].drawMoves(canvas);
