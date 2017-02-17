@@ -87,8 +87,7 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
 
 
     @Override
-    public void onDraw(Canvas canvas)
-    {
+    public void onDraw(Canvas canvas) {
 
         //paint for the lines
         Paint BoardLine = new Paint();
@@ -167,16 +166,17 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
                     for(int j = 0; j < 9; j++){
                         if(Pieces[i][j] != null){
                             if(Pieces[i][j].getSelected()){
-                                Pieces[i][j].setPos(row, col);
-                                //Pieces[row][col] = new shogiPiece(row, col, Pieces[i][j].getPiece());
-                                //Pieces[i][j] = null;
+                                Pieces[row][col] = new shogiPiece(row, col, Pieces[i][j].getPiece());
+                                Pieces[i][j] = null;
                             }
                         }
                     }
                 }
-                return true;
+                Pieces[row][col].setSelected(false);
+                pieceIsSelected = false;
+            }else {
+                return false;
             }
-            return false;
         }else{
             //select piece if not selected yet, deselect it if selected
             if(Pieces[row][col].getSelected()){
