@@ -167,15 +167,16 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
                     for(int j = 0; j < 9; j++){
                         if(Pieces[i][j] != null){
                             if(Pieces[i][j].getSelected()){
-                                Pieces[row][col] = new shogiPiece(row, col, Pieces[i][j].getPiece());
-                                Pieces[i][j] = null;
+                                Pieces[i][j].setPos(row, col);
+                                //Pieces[row][col] = new shogiPiece(row, col, Pieces[i][j].getPiece());
+                                //Pieces[i][j] = null;
                             }
                         }
                     }
                 }
-            } else {
-                return false;
+                return true;
             }
+            return false;
         }else{
             //select piece if not selected yet, deselect it if selected
             if(Pieces[row][col].getSelected()){
