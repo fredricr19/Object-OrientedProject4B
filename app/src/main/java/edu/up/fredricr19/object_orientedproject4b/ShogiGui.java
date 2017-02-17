@@ -43,46 +43,20 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
         BoardBackground = BitmapFactory.decodeResource(getResources(), R.drawable.shogi_board);
         BoardBackground = Bitmap.createScaledBitmap(BoardBackground, (int) (10 * spaceDim), (int) (10 * spaceDim + spaceDim), false);
 
+        for(int row = 0; row < 4; row++){
+            for(int col = 0; col < 9; col++){
+                shogiPiece aPiece = new shogiPiece(row, col, "Pawn");
+                Pieces[row][col] = aPiece;
+            }
+        }
 
-        row = 4;
-        col = 4;
-        shogiPiece SilverPiece = new shogiPiece(row, col, "Silver");
-        Pieces[row][col] = SilverPiece;
+        for(int row = 4; row < 5; row++){
+            for(int col = 0; col < 4; col++){
+                shogiPiece aPiece = new shogiPiece(row, col, "Pawn");
+                Pieces[row][col] = aPiece;
 
-        row = 3;
-        col = 3;
-        shogiPiece bishopPiece = new shogiPiece(row, col, "Bishop");
-        Pieces[row][col] = bishopPiece;
-
-        row = 8;
-        col = 0;
-        shogiPiece LancePiece = new shogiPiece(row, col, "Lance");
-        Pieces[row][col] = LancePiece;
-
-        row = 7;
-        col = 7;
-        shogiPiece rookPiece = new shogiPiece(row, col, "Rook");
-        Pieces[row][col] = rookPiece;
-
-        row = 6;
-        col = 6;
-        shogiPiece pawnPiece = new shogiPiece(row, col, "Pawn");
-        Pieces[row][col] = pawnPiece;
-
-        row = 2;
-        col = 3;
-        shogiPiece knightPiece = new shogiPiece(row, col, "Knight");
-        Pieces[row][col] = knightPiece;
-
-        row = 7;
-        col = 3;
-        shogiPiece kingPiece = new shogiPiece(row, col, "King");
-        Pieces[row][col] = kingPiece;
-
-        row = 3;
-        col = 7;
-        shogiPiece goldPiece = new shogiPiece(row, col, "Gold");
-        Pieces[row][col] = goldPiece;
+            }
+        }
     }
 
 
@@ -122,7 +96,6 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
             canvas.drawLine(topLeftX + i * spaceDim, topLeftY, topLeftX + i * spaceDim, topLeftY + 9 * spaceDim, BoardLine);
             canvas.drawLine(topLeftX, topLeftY + i * spaceDim, topLeftX + 9 * spaceDim, topLeftY+ i * spaceDim, BoardLine);
         }
-
 
         //draw pieces
         for(i = 0; i < 9; i++) {
