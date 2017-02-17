@@ -114,18 +114,9 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
         //set touch listener for drawing pieces on the board
         this.setOnTouchListener(this);
 
-
-        //long time = System.currentTimeMillis();
-
-
         //draw Shogi board background
         canvas.drawColor(Color.BLACK);
         canvas.drawBitmap(BoardBackground, backBoardTopLeftX, backBoardTopLeftY, null);
-
-
-        //time = System.currentTimeMillis() - time;
-        //Log.i("Time to draw board", "" + time);
-
 
         //draw vertical lines; start xy is top point, end xy is bottom point
         for(i = 0; i < 10; i++) {
@@ -259,7 +250,4 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
 
         */
     }
-
-
-
 }

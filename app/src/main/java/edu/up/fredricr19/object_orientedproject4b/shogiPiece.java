@@ -53,7 +53,7 @@ public class shogiPiece {
         double n;  //Helps center english words if shortHand = true
         float a = 0; //Does something --- leave this alone
 
-        int font = (r / 4); //Sets font
+        int font = (r/4); //Sets font
         int start = 5; //A sort of padding
 
         int xText = x - font / 2;
