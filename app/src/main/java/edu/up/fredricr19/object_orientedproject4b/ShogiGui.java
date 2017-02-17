@@ -161,27 +161,43 @@ public class ShogiGui extends SurfaceView implements View.OnTouchListener {
 
 
         //tapped space has no piece
-        if(Pieces[row][col] == null)
-            return false;
-
-        //select piece if not selected yet, deselect it if selected
-        if(Pieces[row][col].getSelected()){
-            Pieces[row][col].setSelected(false);
-            pieceIsSelected = false;
-        }else{
-            for(int i = 0; i < 9; i++){
-                for(int j = 0; j < 9; j++){
-                    if(Pieces[i][j] != null){
-                        if(Pieces[i][j].getSelected()){
-                            Pieces[i][j].setSelected(false);
+        if(Pieces[row][col] == null) {
+            if(pieceIsSelected){
+                for(int i = 0; i < 9; i++){
+                    for(int j = 0; j < 9; j++){
+                        if(Pieces[i][j] != null){
+                            if(Pieces[i][j].getSelected()){
+                                Pieces[row][col] = new shogiPiece(row, col, Pieces[i][j].getPiece());
+                                Pieces[i][j] = null;
+                            }
                         }
                     }
                 }
+            } else {
+                return false;
             }
+        }else{
+            //select piece if not selected yet, deselect it if selected
+            if(Pieces[row][col].getSelected()){
+                Pieces[row][col].setSelected(false);
+                pieceIsSelected = false;
+            }else{
+                for(int i = 0; i < 9; i++){
+                    for(int j = 0; j < 9; j++){
+                        if(Pieces[i][j] != null){
+                            if(Pieces[i][j].getSelected()){
+                                Pieces[i][j].setSelected(false);
+                            }
+                        }
+                    }
+                }
 
-            Pieces[row][col].setSelected(true);
-            pieceIsSelected = true;
+                Pieces[row][col].setSelected(true);
+                pieceIsSelected = true;
+            }
         }
+
+
 
 
         //redraw board with pieces updated
