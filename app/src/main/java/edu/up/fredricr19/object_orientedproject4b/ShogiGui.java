@@ -12,7 +12,9 @@ import android.view.SurfaceView;
 import android.view.View;
 
 /**
- * Created by Javier on 25-Jan-17.
+ * @author Javier Resop
+ * @author Chase Des Laurier
+ * @author Ryan Fredrickson
  */
 
 public class ShogiGui extends SurfaceView implements View.OnTouchListener {
