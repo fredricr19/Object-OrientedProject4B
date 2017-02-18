@@ -168,10 +168,6 @@ public class shogiPiece {
         Paint CirclePaint = new Paint();
         CirclePaint.setColor(Color.BLUE);
 
-        if(!player){
-            C.rotate(180f, x, y);
-        }
-
         float xPos, yPos;
 
         //find piece type, draw circles in spaces where this type of piece can move
@@ -336,10 +332,6 @@ public class shogiPiece {
                 yPos = y + ShogiGui.spaceDim;
                 C.drawCircle(xPos, yPos, ShogiGui.spaceDim / 3, CirclePaint);
             }
-        }
-
-        if(!player){
-            C.rotate(180f, x, y);
         }
     }
 
